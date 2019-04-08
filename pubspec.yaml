@@ -1,0 +1,3 @@
+name: localup
+dependencies:
+    audioplayer: ^0.5.2

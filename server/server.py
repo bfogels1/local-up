@@ -1,10 +1,11 @@
 from flask import Flask, request, jsonify, send_from_directory
-from models.shared import db # done
-from controllers.import_controllers import import_controllers # done
+from models.shared import db  # done
+from controllers.import_controllers import import_controllers  # done
 from sqlalchemy.exc import IntegrityError
 import os
 import sys
 from exceptions.basic_exception import BasicException
+
 
 def create_test_app(self):
     app = create_app()
@@ -12,7 +13,7 @@ def create_test_app(self):
     app.config['TESTING'] = True
     db.init_app(app)
 
-    #with open('SPOTIFY_INFO', 'r') as f:
+    # with open('SPOTIFY_INFO', 'r') as f:
     #    lines = f.readlines()
     #    values = [line.strip().split('=')[1] for line in lines]
     #    app.config['SPOTIFY_USER'] = values[0]
@@ -20,10 +21,11 @@ def create_test_app(self):
 
     return app
 
+
 def create_real_app(testmode=False):
     app = create_app()
-    #app.config['SPOTIFY_USER'] = os.environ.get('SPOTIFY_USER', None)
-    #app.config['SPOTIFY_SECRET'] = os.environ.get('SPOTIFY_SECRET', None)
+    # app.config['SPOTIFY_USER'] = os.environ.get('SPOTIFY_USER', None)
+    # app.config['SPOTIFY_SECRET'] = os.environ.get('SPOTIFY_SECRET', None)
     if testmode:
         with open('DB_INFO', 'r') as f:
             lines = f.readlines()
@@ -35,18 +37,18 @@ def create_real_app(testmode=False):
     db.init_app(app)
     return app
 
+
 def create_app():
 
-    #app = Flask(__name__, static_folder='../app/web/static', template_folder='../app/web/templates')
+    # app = Flask(__name__, static_folder='../app/web/static', template_folder='../app/web/templates')
     app = Flask(__name__)
     import_controllers(app)
 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-    #@app.route('/')
-    #def index():
+    # @app.route('/')
+    # def index():
     #    return send_from_directory(app.template_folder, "index.html")
-
 
     # @app.route('/choose_songs')
     # def choose_songs():
@@ -73,7 +75,6 @@ def create_app():
     #         'message': str(e)
     #     }), 400
 
-
     @app.errorhandler(Exception)
     def unhandled_exception(e):
         print(e)
@@ -84,21 +85,20 @@ def create_app():
     @app.route('/<path:path>')
     def catch_all(path):
         return 'ROUTE NOT FOUND'
-
     return app
+
 
 if __name__ == "__main__":
     os.environ["PYTHONHASHSEED"] = "0"
     if '--testmode' in sys.argv:
         app = create_real_app(True)
         if '--port' in sys.argv:
-            if (len(sys.argv) < 4):
+            if len(sys.argv) < 4:
                 print('Usage: python3 server.py --testmode --port <port number>')
             else:
-                app.run(debug = True, host=sys.argv[3], port=5000)
+                app.run(debug=True, host=sys.argv[3], port=5000)
         else:
-            app.run(debug = True)
-
+            app.run(debug=True)
     else:
         app = create_real_app()
         port = int(os.environ.get('PORT', 5000))

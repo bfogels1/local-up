@@ -1,7 +1,6 @@
 package io.flutter.plugins;
 
 import io.flutter.plugin.common.PluginRegistry;
-import bz.rxla.audioplayer.AudioplayerPlugin;
 
 /**
  * Generated file. Do not edit.
@@ -11,7 +10,6 @@ public final class GeneratedPluginRegistrant {
     if (alreadyRegisteredWith(registry)) {
       return;
     }
-    AudioplayerPlugin.registerWith(registry.registrarFor("bz.rxla.audioplayer.AudioplayerPlugin"));
   }
 
   private static boolean alreadyRegisteredWith(PluginRegistry registry) {

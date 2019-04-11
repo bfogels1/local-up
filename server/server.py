@@ -24,16 +24,19 @@ def create_test_app(self):
 
 def create_real_app(testmode=False):
     app = create_app()
-    # app.config['SPOTIFY_USER'] = os.environ.get('SPOTIFY_USER', None)
+     # app.config['SPOTIFY_USER'] = os.environ.get('SPOTIFY_USER', None)
     # app.config['SPOTIFY_SECRET'] = os.environ.get('SPOTIFY_SECRET', None)
     if testmode:
-        with open('DB_INFO', 'r') as f:
-            lines = f.readlines()
-            values = [line.strip().split('=')[1] for line in lines]
-            app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://{}:{}@{}/{}'.format(
-                values[0], values[1], values[2], values[3])
+         with open('DB_INFO', 'r') as f:
+             lines = f.readlines()
+             values = [line.strip().split('=')[1] for line in lines]
+             app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://{}:{}@{}/{}'.format(
+                 values[0], values[1], values[2], values[3])
     else:
         app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DB_URI', None)
+
+    #mysql://bbb386a7ed3a40:916914d0@us-cdbr-iron-east-03.cleardb.net/heroku_4e290ac3ef1b5fb?reconnect=true
+
     db.init_app(app)
     return app
 

@@ -7,7 +7,7 @@ from models.user_passwords import UserPasswords # done
 
 class User(db.Model, BaseModel):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100), nullable=False)
+    name = db.Column(db.String(100), nullable=False)
     #display_name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
 

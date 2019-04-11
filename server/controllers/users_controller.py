@@ -14,7 +14,7 @@ class UsersController():
     @users_controller.route('/create', methods=['POST'])
     def create():
         json = request.get_json()
-        username = json["username"]
+        #username = json["username"]
         #display_name = json["display_name"]
         name = json["name"]
         email = json["email"]
@@ -24,8 +24,9 @@ class UsersController():
         #        'message': 'The e-mail provided is not in the correct format.'
         #    }), 400
         user = User(
-            username=username,
-            display_name=display_name,
+            #username=username,
+            name=name,
+            #display_name=display_name,
             email=email,
         )
         token = user.insert(password)
@@ -39,7 +40,8 @@ class UsersController():
     @users_controller.route('/log_in', methods=['POST'])
     def log_in():
         json = request.get_json()
-        username = json["username"]
+        #username = json["username"]
+        email = json["email"]
         password = json["password"]
         user = User.query.filter(
             User.username == username

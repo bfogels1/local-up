@@ -1,9 +1,14 @@
 from flask import Flask, request, jsonify, abort
+#import json
 #from models.shared import db  # done
+#from firebase import Firebase
+import json
 import firebase_admin
-from firebase_admin import db
+from firebase_admin import db, credentials
 #from controllers.import_controllers import import_controllers  # done
 #from sqlalchemy.exc import IntegrityError
+from tools.password_encryption import encode_password, decode_password
+#from models.user import User
 import os
 import sys
 from exceptions.basic_exception import BasicException
@@ -11,39 +16,85 @@ from exceptions.basic_exception import BasicException
 def create_app():
     app = Flask(__name__)
 
-    firebase_admin.initialize_app(options={
-        'databaseURL': 'https://localup-34dd4.firebaseio.com'
+    cred = credentials.Certificate("localup-42a2d0b55f0b.json")
+    firebase_admin.initialize_app(cred, {
+        'databaseURL' : 'https://localup-34dd4.firebaseio.com'
     })
+
+
     USERS = db.reference('users')
 
     @app.route('/users/create', methods=['POST'])
     def create_user():
         req = request.json
-        user = USERS.push(req)
+        name = req["name"]
+        email = req["email"]
+        encoded_password = encode_password(req["password"])
+        data = {
+            'email' : email,
+            'name' : name,
+            'password' : encoded_password
+         }
+        encoded_data = data.encode('ascii')
+        user = USERS.push(encoded_data)
+        #user = USERS.push(req)
+
+
+
+
         return jsonify({'id': user.key}), 201
 
-    # @app.route('/heroes/<id>')
-    # def read_hero(id):
-    #     return flask.jsonify(_ensure_hero(id))
+    # @app.route('/users/create', methods=['POST'])
+    # def create_user():
+    #     req = request.json
+    #     name = req["name"]
+    #     email = req["email"]
+    #     password = req["password"]
+    #     encoded_password = encode_password(password)
+    #     #print('here 1')
+    #     #user = User(
+    #     #    #name=name,
+    #     #    #email=email,
+    #     #    #password = encode_password(password),
+    #     #    #password =password,
+    #     #)
+    #     #data = jsonify(name=name,password=encoded_password)
+    #     data = {
+    #         'name' : name,
+    #         'password' : encoded_password
+    #     }
+    #     #print('here 2')
 
-    # @app.route('/heroes/<id>', methods=['PUT'])
-    # def update_hero(id):
-    #     _ensure_hero(id)
-    #     req = flask.request.json
-    #     SUPERHEROES.child(id).update(req)
-    #     return flask.jsonify({'success': True})
+    #     #json = jsonify(data)
 
-    # @app.route('/heroes/<id>', methods=['DELETE'])
-    # def delete_hero(id):
-    #     _ensure_hero(id)
-    #     SUPERHEROES.child(id).delete()
-    #     return flask.jsonify({'success': True})
+    #     #USERS.child(email).set(json.dumps(data))
+    #     #USERS.child(email).put(data)
+    #     #USERS.child(email).push(json)
+    #     USERS.push(data)
+    #     #USERS.push(json)
+    #     #print('here 3')
+    #     #USERS.push(json)
+    #     return jsonify({'message': 'Success'}), 201
 
-    # def _ensure_user(id):
-    #     user = USERS.child(id).get()
-    #     if not user:
-    #         abort(404)
-    #     return user
+    # @app.route('/users/login', methods=['POST'])
+    # def login_user():
+    #     json = request.json
+    #     email = json["email"]
+    #     password = json["password"]
+    #     encoded_password = encode_password(password)
+    #     if _ensure_user(email):
+    #         user = USERS.child(email).get()
+    #         actual_password = user[password]
+    #         if encoded_password == actual_password:
+    #             return jsonify({'message': 'Success'}), 201
+    #         return jsonify({'message': 'Incorrect Password'}), 400
+    #     return jsonify({'message': 'Invalid Email'}), 400
+
+    # def _ensure_user(email):
+    #      user = USERS.child(email).get()
+    #      if not user:
+    #          return False
+    #      return True
 
     @app.errorhandler(Exception)
     def unhandled_exception(e):

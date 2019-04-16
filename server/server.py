@@ -21,6 +21,8 @@ def create_app():
         'databaseURL' : 'https://localup-34dd4.firebaseio.com'
     })
 
+    #firebase = firebase.FirebaseApplication(‘https://localup-34dd4.firebaseio.com’, None)
+
 
     USERS = db.reference('users')
 
@@ -29,18 +31,24 @@ def create_app():
         req = request.json
         name = req["name"]
         email = req["email"]
-        #encoded_password = encode_password(req["password"])
-        #data = {
+        encoded_password = encode_password(req["password"])
+        # data = {
         #    'email' : email,
         #    'name' : name,
         #    'password' : encoded_password
         #}
-        #encoded_data = json.JSONEncode()
+
+        user = USERS.push({
+           'email' : email,
+           'name' : name,
+           'password' : encoded_password
+        })
+
+        #encoded_data = json.JSONEncode(data)
+
         #user = USERS.push(encoded_data)
-        user = USERS.push(req)
-
-
-
+        
+        #user = USERS.push(req)
 
         return jsonify({'id': user.key}), 201
 

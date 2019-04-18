@@ -29,26 +29,28 @@ def create_app():
     @app.route('/users/create', methods=['POST'])
     def create_user():
         req = request.json
-        name = req["name"]
-        email = req["email"]
-        encoded_password = encode_password(req["password"])
+        
+        # name = req["name"]
+        # email = req["email"]
+        # encoded_password = encode_password(req["password"])
+
         # data = {
         #    'email' : email,
         #    'name' : name,
         #    'password' : encoded_password
         #}
 
-        user = USERS.push({
-           'email' : email,
-           'name' : name,
-           'password' : encoded_password
-        })
+        # user = USERS.push({
+        #    'email' : email,
+        #    'name' : name,
+        #    'password' : encoded_password
+        # })
 
         #encoded_data = json.JSONEncode(data)
 
         #user = USERS.push(encoded_data)
         
-        #user = USERS.push(req)
+        user = USERS.push(req)
 
         return jsonify({'id': user.key}), 201
 

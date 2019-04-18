@@ -1,24 +1,25 @@
 from flask import Flask, request, jsonify, abort
-#import json
-#from models.shared import db  # done
-#from firebase import Firebase
+# import json
+# from models.shared import db  # done
+# from firebase import Firebase
 import json
 import firebase_admin
 from firebase_admin import db, credentials
-#from controllers.import_controllers import import_controllers  # done
-#from sqlalchemy.exc import IntegrityError
+# from controllers.import_controllers import import_controllers  # done
+# from sqlalchemy.exc import IntegrityError
 from tools.password_encryption import encode_password
-#from models.user import User
+# from models.user import User
 import os
 import sys
 from exceptions.basic_exception import BasicException
+
 
 def create_app():
     app = Flask(__name__)
 
     cred = credentials.Certificate("localup-42a2d0b55f0b.json")
     firebase_admin.initialize_app(cred, {
-        'databaseURL' : 'https://localup-34dd4.firebaseio.com'
+        'databaseURL': 'https://localup-34dd4.firebaseio.com'
     })
 
     USERS = db.reference('users')
@@ -76,6 +77,7 @@ def create_app():
         return 'ROUTE NOT FOUND'
     return app
 
+
 if __name__ == "__main__":
     if '--testmode' in sys.argv:
         app = create_app()
@@ -90,4 +92,3 @@ if __name__ == "__main__":
         app = create_app()
         port = int(os.environ.get('PORT', 5000))
         app.run(debug=False, host="0.0.0.0", port=port)
- 

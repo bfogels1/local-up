@@ -31,6 +31,10 @@ def create_app():
         email = req["email"]
         encoded_password = encode_password(req["password"])
         
+        snapshot = USERS.order_by_child('email').equal_to(email).get()
+        if snapshot:
+            return jsonify({'message': 'Email Address Already Taken'}), 400
+
         user = USERS.push({
             'name': name,
             'email': email,
@@ -59,19 +63,6 @@ def create_app():
             return jsonify({'message': 'Incorrect Password'}), 400
         return jsonify({'message': 'Success'}), 201
 
-        # if _ensure_user(email):
-        #     user = USERS.child(email).get()
-        #     actual_password = user[password]
-        #     if encoded_password == actual_password:
-        #         return jsonify({'message': 'Success'}), 201
-        #     return jsonify({'message': 'Incorrect Password'}), 400
-        # return jsonify({'message': 'Invalid Email'}), 400
-
-    # def _ensure_user(email):
-    #      user = USERS.child(email).get()
-    #      if not user:
-    #          return False
-    #      return True
 
     @app.errorhandler(Exception)
     def unhandled_exception(e):

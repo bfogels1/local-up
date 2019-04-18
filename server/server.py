@@ -7,7 +7,7 @@ import firebase_admin
 from firebase_admin import db, credentials
 #from controllers.import_controllers import import_controllers  # done
 #from sqlalchemy.exc import IntegrityError
-from tools.password_encryption import encode_password, decode_password
+from tools.password_encryption import encode_password
 #from models.user import User
 import os
 import sys
@@ -21,84 +21,51 @@ def create_app():
         'databaseURL' : 'https://localup-34dd4.firebaseio.com'
     })
 
-    #firebase = firebase.FirebaseApplication(‘https://localup-34dd4.firebaseio.com’, None)
-
-
     USERS = db.reference('users')
 
     @app.route('/users/create', methods=['POST'])
     def create_user():
         req = request.json
+
+        name = req["name"]
+        email = req["email"]
+        encoded_password = encode_password(req["password"])
         
-        # name = req["name"]
-        # email = req["email"]
-        # encoded_password = encode_password(req["password"])
-
-        # data = {
-        #    'email' : email,
-        #    'name' : name,
-        #    'password' : encoded_password
-        #}
-
-        # user = USERS.push({
-        #    'email' : email,
-        #    'name' : name,
-        #    'password' : encoded_password
-        # })
-
-        #encoded_data = json.JSONEncode(data)
-
-        #user = USERS.push(encoded_data)
-        
-        user = USERS.push(req)
+        user = USERS.push({
+            'name': name,
+            'email': email,
+            'password': encoded_password
+          });
 
         return jsonify({'id': user.key}), 201
 
-    # @app.route('/users/create', methods=['POST'])
-    # def create_user():
-    #     req = request.json
-    #     name = req["name"]
-    #     email = req["email"]
-    #     password = req["password"]
-    #     encoded_password = encode_password(password)
-    #     #print('here 1')
-    #     #user = User(
-    #     #    #name=name,
-    #     #    #email=email,
-    #     #    #password = encode_password(password),
-    #     #    #password =password,
-    #     #)
-    #     #data = jsonify(name=name,password=encoded_password)
-    #     data = {
-    #         'name' : name,
-    #         'password' : encoded_password
-    #     }
-    #     #print('here 2')
 
-    #     #json = jsonify(data)
+    @app.route('/users/login', methods=['POST'])
+    def login_user():
+        json = request.json
+        email = json["email"]
+        password = json["password"]
+        encoded_password = encode_password(password)
 
-    #     #USERS.child(email).set(json.dumps(data))
-    #     #USERS.child(email).put(data)
-    #     #USERS.child(email).push(json)
-    #     USERS.push(data)
-    #     #USERS.push(json)
-    #     #print('here 3')
-    #     #USERS.push(json)
-    #     return jsonify({'message': 'Success'}), 201
+        snapshot = USERS.order_by_child('email').equal_to(email).get()
+        for key, val in snapshot.items():
+            retrieved_password = val['password']
 
-    # @app.route('/users/login', methods=['POST'])
-    # def login_user():
-    #     json = request.json
-    #     email = json["email"]
-    #     password = json["password"]
-    #     encoded_password = encode_password(password)
-    #     if _ensure_user(email):
-    #         user = USERS.child(email).get()
-    #         actual_password = user[password]
-    #         if encoded_password == actual_password:
-    #             return jsonify({'message': 'Success'}), 201
-    #         return jsonify({'message': 'Incorrect Password'}), 400
-    #     return jsonify({'message': 'Invalid Email'}), 400
+        print(retrieved_password)
+        print(encoded_password)
+        if not snapshot:
+            return jsonify({'message': 'Invalid Email'}), 400
+        if retrieved_password != encoded_password:
+            return jsonify({'message': 'Incorrect Password'}), 400
+        return jsonify({'message': 'Success'}), 201
+
+        # if _ensure_user(email):
+        #     user = USERS.child(email).get()
+        #     actual_password = user[password]
+        #     if encoded_password == actual_password:
+        #         return jsonify({'message': 'Success'}), 201
+        #     return jsonify({'message': 'Incorrect Password'}), 400
+        # return jsonify({'message': 'Invalid Email'}), 400
 
     # def _ensure_user(email):
     #      user = USERS.child(email).get()

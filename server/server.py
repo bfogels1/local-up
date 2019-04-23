@@ -23,6 +23,9 @@ def create_app():
     })
 
     USERS = db.reference('users')
+    SONGS = db.reference('songs')
+    ARTISTS = db.reference('artists')
+    SONGS = db.reference('songs')
 
     @app.route('/users/create', methods=['POST'])
     def create_user():
@@ -63,6 +66,76 @@ def create_app():
         if retrieved_password != encoded_password:
             return jsonify({'message': 'Incorrect Password'}), 400
         return jsonify({'message': 'Success'}), 201
+
+    @app.route('/artists/create', methods=['POST'])
+    def create_artist():
+        req = request.json
+
+        name = req["name"]
+        email = req["email"]
+        encoded_password = encode_password(req["password"])
+        twitter = req['twitter']
+        insta = req['insta']
+        fb = req['fb']
+        
+        snapshot = ARTISTS.order_by_child('email').equal_to(email).get()
+        if snapshot:
+            return jsonify({'message': 'Email Address Already Taken'}), 400
+
+        artist = ARTISTS.push({
+            'name': name,
+            'email': email,
+            'password': encoded_password,
+            'twitter' : twitter,
+            'insta' : insta,
+            'fb' : fb
+          });
+
+        return jsonify({'id': artist.key}), 201
+
+
+    @app.route('/artists/login', methods=['POST'])
+    def login_artist():
+        json = request.json
+        email = json["email"]
+        password = json["password"]
+        encoded_password = encode_password(password)
+
+        snapshot = ARTISTS.order_by_child('email').equal_to(email).get()
+        for key, val in snapshot.items():
+            retrieved_password = val['password']
+
+        print(retrieved_password)
+        print(encoded_password)
+        if not snapshot:
+            return jsonify({'message': 'Invalid Email'}), 400
+        if retrieved_password != encoded_password:
+            return jsonify({'message': 'Incorrect Password'}), 400
+        return jsonify({'message': 'Success'}), 201
+
+
+    @app.route('/songs/add', methods=['POST'])
+    def add_song():
+        req = request.json
+
+        song_name = req["song_name"]
+        artist = req["artist"]
+        url = req["url"]
+        genre = req["genre"]
+        
+        snapshot = SONGS.order_by_child('song_name').equal_to(song_name).get()
+        if snapshot:
+            return jsonify({'message': 'Song Name Already Taken'}), 400
+
+        song = SONGS.push({
+            'song_name': song_name,
+            'artist': artist,
+            'url': url,
+            'genre': genre
+          });
+
+        return jsonify({'id': song.key}), 201
+
 
 
     @app.errorhandler(Exception)

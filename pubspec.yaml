@@ -31,6 +31,10 @@ flutter:
     - assets/images/mic.jpeg
     - assets/images/localup_white.png
     - assets/images/localup_color.png
+    - assets/images/hector-bermudez.jpg
+    - assets/images/light_instruments.jpg
+    - assets/images/light_instruments-big.jpg
+    - assets/images/rock_concert.jpg
   # - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

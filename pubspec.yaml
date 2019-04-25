@@ -5,8 +5,11 @@ dependencies:
   flutter:
     sdk: flutter
   audioplayer: ^0.5.2
-  http: ^0.12.0+2
+  http: ^0.11.3+12
   path_provider: ^0.5.0+1
+  carousel_slider: ^1.3.0
+  font_awesome_flutter: ^8.4.0
+  material_design_icons_flutter: ^3.2.3595
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -35,6 +38,7 @@ flutter:
     - assets/images/mic.jpeg
     - assets/images/localup_white.png
     - assets/images/localup_color.png
+    - assets/images/localup_white_small.png
   # - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -52,6 +56,7 @@ flutter:
     - family: icomoon
       fonts:
         - asset: assets/fonts/IcoMoon.ttf
+        - asset: assets/fonts/boxicons.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:

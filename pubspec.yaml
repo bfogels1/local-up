@@ -4,6 +4,10 @@ description: A new Flutter application.
 dependencies:
   flutter:
     sdk: flutter
+  audioplayer: ^0.5.2
+  http: ^0.12.0+2
+  path_provider: ^0.5.0+1
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -31,10 +35,6 @@ flutter:
     - assets/images/mic.jpeg
     - assets/images/localup_white.png
     - assets/images/localup_color.png
-    - assets/images/hector-bermudez.jpg
-    - assets/images/light_instruments.jpg
-    - assets/images/light_instruments-big.jpg
-    - assets/images/rock_concert.jpg
   # - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

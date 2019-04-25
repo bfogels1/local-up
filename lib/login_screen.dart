@@ -8,6 +8,16 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen>
     with TickerProviderStateMixin {
 
+  // INITIALIZING GENRE SLIDERS
+  double _popSliderValue = 2.0;
+  double _rapSliderValue = 2.0;
+  double _rbSliderValue = 2.0;
+  double _rockSliderValue = 2.0;
+  double _classicalSliderValue = 2.0;
+  double _edmSliderValue = 2.0;
+  double _hiphopSliderValue = 2.0;
+  double _altindieSliderValue = 2.0;
+
   @override
   void initState() {
     super.initState();
@@ -483,13 +493,13 @@ class _LoginScreenState extends State<LoginScreen>
           fit: BoxFit.cover,
         ),
       ),
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
           title: Icon(Icons.menu),
           backgroundColor: Color(0x00000000),
           elevation: 0.0,
-          ),
+        ),
         body: Center(
           child: new Column(
             children: <Widget>[
@@ -718,6 +728,7 @@ class _LoginScreenState extends State<LoginScreen>
                   ],
                 ),
               ),
+
             ],
           ),
          ),
@@ -726,10 +737,9 @@ class _LoginScreenState extends State<LoginScreen>
   }
 
   // Set Up Pages
-  // Preferences -> : Music Taste (genres with slider) -> Live Show Radius ->
-  // Live Show Price -> Artist Matching (traits with slider)
+  // Preferences -> : City -> Music Taste (genres with slider)
 
-  Widget setupPage() {
+  Widget genrePage() {
     return new Container(
       height: MediaQuery.of(context).size.height,
       decoration: BoxDecoration(
@@ -751,11 +761,343 @@ class _LoginScreenState extends State<LoginScreen>
         body: Center(
           child: new Column(
             children: <Widget>[
+
               // LOGO
-              Container(
-                padding: EdgeInsets.only(top: 50.0),
-                child: Center(
-                    child: Image.asset('assets/images/localup_color.png')
+//              Container(
+//                padding: EdgeInsets.only(top: 5.0),
+//                child: Center(
+//                    child: Image.asset('assets/images/localup_color.png')
+//                ),
+//              ),
+
+              // POP
+              new Row(
+                children: <Widget>[
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(left: 40.0),
+                      child: new Text(
+                        "POP",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              new Container(
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:
+                20.0),
+                alignment: Alignment.center,
+                child: new Row(
+                  children: <Widget>[
+                    new Expanded(
+                      child: Slider(
+                        activeColor: Colors.redAccent,
+                        min: 0.0,
+                        max: 5.0,
+                        divisions: 4,
+                        onChanged: (newRating) {
+                          setState(() => _popSliderValue = newRating);
+                        },
+                        value: _popSliderValue,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+//              new Container(
+//                width: ,
+//              ),
+
+              // RAP
+              new Row(
+                children: <Widget>[
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(left: 40.0),
+                      child: new Text(
+                        "RAP",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              new Container(
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:
+                20.0),
+                alignment: Alignment.center,
+                child: new Row(
+                  children: <Widget>[
+                    new Expanded(
+                      child: Slider(
+                        activeColor: Colors.redAccent,
+                        min: 0.0,
+                        max: 5.0,
+                        divisions: 4,
+                        onChanged: (newRating) {
+                          setState(() => _rapSliderValue = newRating);
+                        },
+                        value: _rapSliderValue,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // R&B
+              new Row(
+                children: <Widget>[
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(left: 40.0),
+                      child: new Text(
+                        "R&B",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              new Container(
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:
+                20.0),
+                alignment: Alignment.center,
+                child: new Row(
+                  children: <Widget>[
+                    new Expanded(
+                      child: Slider(
+                        activeColor: Colors.redAccent,
+                        min: 0.0,
+                        max: 5.0,
+                        divisions: 4,
+                        onChanged: (newRating) {
+                          setState(() => _rbSliderValue = newRating);
+                        },
+                        value: _rbSliderValue,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // ROCK
+              new Row(
+                children: <Widget>[
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(left: 40.0),
+                      child: new Text(
+                        "Rock",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              new Container(
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:
+                20.0),
+                alignment: Alignment.center,
+                child: new Row(
+                  children: <Widget>[
+                    new Expanded(
+                      child: Slider(
+                        activeColor: Colors.redAccent,
+                        min: 0.0,
+                        max: 5.0,
+                        divisions: 4,
+                        onChanged: (newRating) {
+                          setState(() => _rockSliderValue = newRating);
+                        },
+                        value: _rockSliderValue,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // CLASSICAL
+              new Row(
+                children: <Widget>[
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(left: 40.0),
+                      child: new Text(
+                        "Classical",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              new Container(
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:
+                20.0),
+                alignment: Alignment.center,
+                child: new Row(
+                  children: <Widget>[
+                    new Expanded(
+                      child: Slider(
+                        activeColor: Colors.redAccent,
+                        min: 0.0,
+                        max: 5.0,
+                        divisions: 4,
+                        onChanged: (newRating) {
+                          setState(() => _classicalSliderValue = newRating);
+                        },
+                        value: _classicalSliderValue,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // EDM
+              new Row(
+                children: <Widget>[
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(left: 40.0),
+                      child: new Text(
+                        "EDM",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              new Container(
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:
+                20.0),
+                alignment: Alignment.center,
+                child: new Row(
+                  children: <Widget>[
+                    new Expanded(
+                      child: Slider(
+                        activeColor: Colors.redAccent,
+                        min: 0.0,
+                        max: 5.0,
+                        divisions: 4,
+                        onChanged: (newRating) {
+                          setState(() => _edmSliderValue = newRating);
+                        },
+                        value: _edmSliderValue,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // HIPHOP
+              new Row(
+                children: <Widget>[
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(left: 40.0),
+                      child: new Text(
+                        "Hip Hop",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              new Container(
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:
+                20.0),
+                alignment: Alignment.center,
+                child: new Row(
+                  children: <Widget>[
+                    new Expanded(
+                      child: Slider(
+                        activeColor: Colors.redAccent,
+                        min: 0.0,
+                        max: 5.0,
+                        divisions: 4,
+                        onChanged: (newRating) {
+                          setState(() => _hiphopSliderValue = newRating);
+                        },
+                        value: _hiphopSliderValue,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // ALTERNATIVE/INDIE
+              new Row(
+                children: <Widget>[
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(left: 40.0),
+                      child: new Text(
+                        "Alternative/Indie",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              new Container(
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:
+                20.0),
+                alignment: Alignment.center,
+                child: new Row(
+                  children: <Widget>[
+                    new Expanded(
+                      child: Slider(
+                        activeColor: Colors.redAccent,
+                        min: 0.0,
+                        max: 5.0,
+                        divisions: 4,
+                        onChanged: (newRating) {
+                          setState(() => _altindieSliderValue = newRating);
+                        },
+                        value: _altindieSliderValue,
+                      ),
+                    ),
+                  ],
                 ),
               ),
 
@@ -798,6 +1140,7 @@ class _LoginScreenState extends State<LoginScreen>
                   ],
                 ),
               ),
+
             ],
           ),
         ),
@@ -842,7 +1185,7 @@ class _LoginScreenState extends State<LoginScreen>
         child: PageView(
           controller: _controller,
           physics: new AlwaysScrollableScrollPhysics(),
-          children: <Widget>[loginPage(), startPage(), signupPage(), setupPage()],
+          children: <Widget>[loginPage(), startPage(), signupPage(), genrePage()],
           scrollDirection: Axis.horizontal,
         ));
   }

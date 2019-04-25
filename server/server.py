@@ -9,6 +9,8 @@ from firebase_admin import db, credentials
 # from sqlalchemy.exc import IntegrityError
 from tools.password_encryption import encode_password
 # from models.user import User
+import uuid
+import random
 import os
 import sys
 from exceptions.basic_exception import BasicException
@@ -26,6 +28,7 @@ def create_app():
     SONGS = db.reference('songs')
     ARTISTS = db.reference('artists')
     SONGS = db.reference('songs')
+    RADIOS = db.reference('radios')
 
     @app.route('/users/create', methods=['POST'])
     def create_user():
@@ -114,8 +117,8 @@ def create_app():
         return jsonify({'message': 'Success'}), 201
 
 
-    @app.route('/songs/add', methods=['POST'])
-    def add_song():
+    @app.route('/songs/new', methods=['POST'])
+    def new_song():
         req = request.json
 
         song_name = req["song_name"]
@@ -135,6 +138,124 @@ def create_app():
           });
 
         return jsonify({'id': song.key}), 201
+
+    @app.route('/radios/new', methods=['POST'])
+    def create_radio():
+        req = request.json
+
+        city = req["city"]
+        genres = req["genres"]
+        songs = req["songs"]
+        radio_name = req["radio_name"]
+        
+        snapshot = RADIOS.order_by_child('radio_name').equal_to(radio_name).get()
+        if snapshot:
+            return jsonify({'message': 'Radio Name Already Taken'}), 400
+
+        radio = RADIOS.push({
+            'city': city,
+            'genres': genres,
+            'songs': songs,
+            'radio_name': radio_name
+          });
+
+        return jsonify({'id': radio.key}), 201
+
+
+    @app.route('/radios/add_song', methods=['POST'])
+    def add_song_to_radio():
+        req = request.json 
+
+        song_name = req["song_name"]
+        radio_name = req["radio_name"]
+
+        snapshot = RADIOS.order_by_child('radio_name').equal_to(radio_name).get()
+        if not snapshot:
+            return jsonify({'message': 'Invalid Radio Name'}), 400
+
+        for key, val in snapshot.items():
+            songs = val['songs']
+            radio_id = key
+
+        for key, val in snapshot.items():
+            print('{0} was {1} meters tall'.format(key, val))
+
+        songs.append(song_name)
+
+        radio_ref = RADIOS.child(radio_id)
+
+        radio_ref.set({
+            'songs' : songs
+        })
+
+        return jsonify({'message': 'Success'}), 201
+
+
+
+
+    @app.route('/users/next_song', methods=['POST'])
+    def random_song():
+        req = request.json
+
+        radio_name = req["radio_name"]
+
+        snapshot = RADIOS.order_by_child('radio_name').equal_to(radio_name).get()
+        if not snapshot:
+            return jsonify({'message': 'Invalid Radio Name'}), 400
+
+        for key, val in snapshot.items():
+            songs = val['songs']
+
+        # get random song from songs
+        random_song = random.choice(songs)
+
+        snapshot = SONGS.order_by_child('song_name').equal_to(random_song).get()
+        for key, val in snapshot.items():
+            url = val['url']
+
+        return jsonify({'url': url}), 201
+
+
+    # @app.route('/radio/new', methods=['POST'])
+    # def create_radio():
+    #     req = request.json
+
+    #     #id = req["id"]
+    #     genres = req["genres"]
+    #     radio_name = req["radio_name"]
+    #     user_email = req["user_email"]
+
+    #     radio_id = uuid.uuid4()
+
+    #     radio = RADIOS.push({
+    #         'radio_id' : str(radio_id),
+    #         'radio_name': radio_name,
+    #         'user_email': user_email,
+    #         'genres': genres
+    #     });
+
+    #     # RADIOS = USERS.child(id).child('radios')
+
+    #     # radio_id = uuid.uuid4()
+
+    #     # snapshot = RADIOS.order_by_child('radio_name').equal_to(radio_name).get()
+    #     # if snapshot:
+    #     #     return jsonify({'message': 'Radio Name Already Taken'}), 400
+
+    #     # radio = RADIOS.push({
+    #     #     'radio_id' : str(radio_id),
+    #     #     'radio_name': radio_name,
+    #     #     'genres': genres
+    #     #   });
+
+    #     #return jsonify({'message': 'Success'}), 201
+
+    #     return jsonify({'id': radio.key}), 201
+        
+
+    # @app.route('/radio/get', methods=['POST'])
+    # def get_radio()
+    #     user_id = req["id"]
 
 
 

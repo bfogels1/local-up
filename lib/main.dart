@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:localup/login_screen.dart';
+import 'package:localup/audio_player.dart';
 
 void main() => runApp(new MyApp());
 
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: new LoginScreen(),
+      home: new AudioApp(),
       debugShowCheckedModeBanner: false,
     );
   }

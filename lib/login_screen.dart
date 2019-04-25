@@ -13,38 +13,42 @@ class _LoginScreenState extends State<LoginScreen>
     super.initState();
   }
 
-  Widget HomePage() {
+
+  Widget startPage() {
     return new Container(
       height: MediaQuery.of(context).size.height,
       decoration: BoxDecoration(
         color: Colors.redAccent[200],
         image: DecorationImage(
           colorFilter: new ColorFilter.mode(
-              Colors.black.withOpacity(0.1), BlendMode.dstATop),
-          image: AssetImage('assets/images/mic.jpeg'),
+             Colors.black.withOpacity(0.3), BlendMode.dstATop),
+          image: AssetImage('assets/images/hector-bermudez.jpg'),
           fit: BoxFit.cover,
         ),
       ),
       child: new Column(
         children: <Widget>[
+
+          // LOGO
           Container(
-            padding: EdgeInsets.only(top: 200.0),
+            padding: EdgeInsets.only(top: 150.0),
             child: Center(
               child: Image.asset('assets/images/localup_white.png')
             ),
           ),
+
+          // SIGN UP BUTTON
           new Container(
             width: MediaQuery.of(context).size.width,
-            margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 150.0),
+            margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 270.0),
             alignment: Alignment.center,
             child: new Row(
               children: <Widget>[
                 new Expanded(
-                  child: new OutlineButton(
+                  child: new FlatButton(
                     shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(30.0)),
-                    color: Colors.redAccent,
-                    highlightedBorderColor: Colors.white,
+                    color: Colors.white,
                     onPressed: () => gotoSignup(),
                     child: new Container(
                       padding: const EdgeInsets.symmetric(
@@ -59,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen>
                               "SIGN UP",
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  color: Colors.white,
+                                  color: Colors.redAccent,
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
@@ -71,6 +75,8 @@ class _LoginScreenState extends State<LoginScreen>
               ],
             ),
           ),
+
+          // LOG IN BUTTON
           new Container(
             width: MediaQuery.of(context).size.width,
             margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 30.0),
@@ -93,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen>
                         children: <Widget>[
                           new Expanded(
                             child: Text(
-                              "LOGIN",
+                              "LOG IN",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: Colors.redAccent,
@@ -108,12 +114,13 @@ class _LoginScreenState extends State<LoginScreen>
               ],
             ),
           ),
+
         ],
       ),
     );
   }
 
-  Widget LoginPage() {
+  Widget loginPage() {
     return new Container(
       height: MediaQuery.of(context).size.height,
       decoration: BoxDecoration(
@@ -126,21 +133,25 @@ class _LoginScreenState extends State<LoginScreen>
         ),
       ),
       child: Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            title: Icon(Icons.menu),
-            backgroundColor: Color(0x00000000),
-            elevation: 0.0,
-          ),
-          body: Center(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          title: Icon(Icons.menu),
+          backgroundColor: Color(0x00000000),
+          elevation: 0.0,
+        ),
+        body: Center(
           child: new Column(
             children: <Widget>[
+
+              // LOGO
               Container(
                 padding: EdgeInsets.only(top: 50.0),
                 child: Center(
                     child: Image.asset('assets/images/localup_color.png')
                 ),
               ),
+
+              // EMAIL INPUT
               new Row(
                 children: <Widget>[
                   new Expanded(
@@ -192,6 +203,8 @@ class _LoginScreenState extends State<LoginScreen>
               Divider(
                 height: 24.0,
               ),
+
+              // PASSWORD INPUT
               new Row(
                 children: <Widget>[
                   new Expanded(
@@ -232,7 +245,7 @@ class _LoginScreenState extends State<LoginScreen>
                         textAlign: TextAlign.left,
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: '*********',
+                          hintText: '********',
                           hintStyle: TextStyle(color: Colors.grey),
                         ),
                       ),
@@ -243,6 +256,8 @@ class _LoginScreenState extends State<LoginScreen>
               Divider(
                 height: 24.0,
               ),
+
+              // FORGOT PASSWORD
               new Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
@@ -269,6 +284,8 @@ class _LoginScreenState extends State<LoginScreen>
                 alignment: Alignment.center,
                 child: new Row(
                   children: <Widget>[
+
+                    // LOG IN BUTTON
                     new Expanded(
                       child: new FlatButton(
                         shape: new RoundedRectangleBorder(
@@ -286,7 +303,7 @@ class _LoginScreenState extends State<LoginScreen>
                             children: <Widget>[
                               new Expanded(
                                 child: Text(
-                                  "LOGIN",
+                                  "LOG IN",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       color: Colors.white,
@@ -301,6 +318,8 @@ class _LoginScreenState extends State<LoginScreen>
                   ],
                 ),
               ),
+
+              // OR CONNECT WITH GOOGLE OR FACEBOOK
               new Container(
                 width: MediaQuery.of(context).size.width,
                 margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 20.0),
@@ -452,7 +471,7 @@ class _LoginScreenState extends State<LoginScreen>
     );
   }
 
-  Widget SignupPage() {
+  Widget signupPage() {
     return new Container(
       height: MediaQuery.of(context).size.height,
       decoration: BoxDecoration(
@@ -480,6 +499,8 @@ class _LoginScreenState extends State<LoginScreen>
                     child: Image.asset('assets/images/localup_color.png')
                 ),
               ),
+
+              // EMAIL INPUT
               new Row(
                 children: <Widget>[
                   new Expanded(
@@ -531,6 +552,8 @@ class _LoginScreenState extends State<LoginScreen>
               Divider(
                 height: 24.0,
               ),
+
+              // PASSWORD INPUT AND CONFIRM
               new Row(
                 children: <Widget>[
                   new Expanded(
@@ -633,6 +656,8 @@ class _LoginScreenState extends State<LoginScreen>
               Divider(
                 height: 24.0,
               ),
+
+              // ALREADY HAVE AN ACCOUNT?
               new Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
@@ -648,11 +673,93 @@ class _LoginScreenState extends State<LoginScreen>
                         ),
                         textAlign: TextAlign.end,
                       ),
-                      onPressed: () => {},
+                      onPressed: () => gotoLogin(),
                     ),
                   ),
                 ],
               ),
+
+              // CONTINUE
+              new Container(
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 50.0),
+                alignment: Alignment.center,
+                child: new Row(
+                  children: <Widget>[
+                    new Expanded(
+                      child: new FlatButton(
+                        shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(30.0),
+                        ),
+                        color: Colors.redAccent,
+                        onPressed: () => gotoSetup(),
+                        child: new Container(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 20.0,
+                            horizontal: 20.0,
+                          ),
+                          child: new Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              new Expanded(
+                                child: Text(
+                                  "CONTINUE",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+         ),
+        ),
+    );
+  }
+
+  // Set Up Pages
+  // Preferences -> : Music Taste (genres with slider) -> Live Show Radius ->
+  // Live Show Price -> Artist Matching (traits with slider)
+
+  Widget setupPage() {
+    return new Container(
+      height: MediaQuery.of(context).size.height,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        image: DecorationImage(
+          colorFilter: new ColorFilter.mode(
+              Colors.white.withOpacity(0.05), BlendMode.dstATop),
+          image: AssetImage('assets/images/mic.jpeg'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          title: Icon(Icons.menu),
+          backgroundColor: Color(0x00000000),
+          elevation: 0.0,
+        ),
+        body: Center(
+          child: new Column(
+            children: <Widget>[
+              // LOGO
+              Container(
+                padding: EdgeInsets.only(top: 50.0),
+                child: Center(
+                    child: Image.asset('assets/images/localup_color.png')
+                ),
+              ),
+
+              // CONTINUE
               new Container(
                 width: MediaQuery.of(context).size.width,
                 margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 50.0),
@@ -676,7 +783,7 @@ class _LoginScreenState extends State<LoginScreen>
                             children: <Widget>[
                               new Expanded(
                                 child: Text(
-                                  "SIGN UP",
+                                  "CONTINUE",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       color: Colors.white,
@@ -693,8 +800,8 @@ class _LoginScreenState extends State<LoginScreen>
               ),
             ],
           ),
-         ),
         ),
+      ),
     );
   }
 
@@ -716,7 +823,17 @@ class _LoginScreenState extends State<LoginScreen>
     );
   }
 
-  PageController _controller = new PageController(initialPage: 1, viewportFraction: 1.0);
+  gotoSetup() {
+    //controller_minus1To0.reverse(from: 0.0);
+    _controller.animateToPage(
+      3,
+      duration: Duration(milliseconds: 800),
+      curve: Curves.bounceOut,
+    );
+  }
+
+  PageController _controller = new PageController(initialPage: 1,
+      viewportFraction: 1.0);
 
   @override
   Widget build(BuildContext context) {
@@ -725,7 +842,7 @@ class _LoginScreenState extends State<LoginScreen>
         child: PageView(
           controller: _controller,
           physics: new AlwaysScrollableScrollPhysics(),
-          children: <Widget>[LoginPage(), HomePage(), SignupPage()],
+          children: <Widget>[loginPage(), startPage(), signupPage(), setupPage()],
           scrollDirection: Axis.horizontal,
         ));
   }

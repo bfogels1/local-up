@@ -175,17 +175,20 @@ def create_app():
 
         for key, val in snapshot.items():
             songs = val['songs']
+            city = val['city']
+            genres = val['genres']
+            radio_name = val['radio_name']
             radio_id = key
-
-        for key, val in snapshot.items():
-            print('{0} was {1} meters tall'.format(key, val))
 
         songs.append(song_name)
 
         radio_ref = RADIOS.child(radio_id)
 
         radio_ref.set({
-            'songs' : songs
+            'city': city,
+            'genres': genres,
+            'songs': songs,
+            'radio_name': radio_name
         })
 
         return jsonify({'message': 'Success'}), 201

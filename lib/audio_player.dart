@@ -1,16 +1,38 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
+import 'dart:convert';
 
 import 'package:audioplayer/audioplayer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter/services.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 typedef void OnError(Exception exception);
 
 const kUrl = "https://s1.vocaroo.com/media/download_temp/Vocaroo_s14lqdIffPud.mp3";
-const kUrl2 = "http://www.rxlabz.com/labz/audio.mp3";
+
+List<T> map<T>(List list, Function handler) {
+  List<T> result = [];
+  for (var i = 0; i < list.length; i++) {
+    result.add(handler(i, list[i]));
+  }
+
+  return result;
+}
+
+final List<String> imgList = [
+  'https://images.unsplash.com/photo-1522863602463-afebb8886ab2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+  'https://images.unsplash.com/photo-1522536421511-14c9073df899?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
+  'https://images.unsplash.com/photo-1508695666381-69deeaa78ccb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80',
+  'https://images.unsplash.com/photo-1550056462-07f9fa8fb9b8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1376&q=80',
+  'https://images.unsplash.com/photo-1541428973141-3e739c202d9e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80'
+];
+
 
 void main() {
   runApp(new MaterialApp(home: new Scaffold(body: new AudioApp())));
@@ -24,6 +46,8 @@ class AudioApp extends StatefulWidget {
 }
 
 class _AudioAppState extends State<AudioApp> {
+
+
   Duration duration;
   Duration position;
 
@@ -83,11 +107,26 @@ class _AudioAppState extends State<AudioApp> {
         });
   }
 
+  IconData ppIcon = Icons.pause;
+
   Future play() async {
+
     await audioPlayer.play(kUrl);
     setState(() {
       playerState = PlayerState.playing;
     });
+  }
+
+  Future nextSong() async {
+    var url = 'http://127.0.0.1:5000/users/next_song';
+    var response = await post(
+        url,
+        headers: {
+        "Content-Type": "application/json",
+        'Accept': 'application/json'},
+        body: json.encode({'radio_name': 'LocalUp Radio'}));
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
   }
 
   Future _playLocal() async {
@@ -97,7 +136,9 @@ class _AudioAppState extends State<AudioApp> {
 
   Future pause() async {
     await audioPlayer.pause();
-    setState(() => playerState = PlayerState.paused);
+    setState(() {
+      playerState = PlayerState.paused;
+    });
   }
 
   Future stop() async {
@@ -146,100 +187,248 @@ class _AudioAppState extends State<AudioApp> {
 
   @override
   Widget build(BuildContext context) {
-    return new Center(
-        child: new Material(
-            elevation: 2.0,
-            color: Colors.grey[200],
-            child: new Center(
-              child: new Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    new Material(child: _buildPlayer()),
-                    localFilePath != null
+
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          iconSize: 30.0,
+          icon: Icon(Icons.arrow_back_ios)
+        ),
+        backgroundColor: Colors.redAccent,
+        title: Image.asset('assets/images/localup_white_small.png'),
+        actions: <Widget>[
+          IconButton(
+            iconSize: 40.0,
+            color: Colors.black,
+            icon: Icon(Icons.menu),
+          ),
+        ]
+      ),
+      body: new Column(
+        children: [
+          /*** SCROLLABLE LIST ***/
+          new ConstrainedBox (
+            constraints: BoxConstraints.expand(height: MediaQuery.of(context).size.height*0.7),
+          child: new ListView (
+            shrinkWrap: true,
+            children: <Widget>[
+              /*** CAROUSEL ***/
+              new Container(
+                padding: EdgeInsets.symmetric(vertical: 16.0),
+                child: CarouselSlider(
+                  height: 300.0,
+                  enlargeCenterPage: true,
+                  enableInfiniteScroll: true,
+                  items: map<Widget>(
+                    imgList,
+                        (index, i) {
+                      return Container(
+                        margin: EdgeInsets.all(5.0),
+                        child: new Material(
+                          elevation: 2.0,
+                          color: Colors.grey[200],
+                          child: new Container (
+                            decoration: BoxDecoration(
+                            image: DecorationImage(image: NetworkImage(i), fit: BoxFit.cover),
+                            )
+                          ),
+                        )
+                      );
+                    },
+                  ),
+                )
+              ),
+              /*** DIVIDER LINE ***/
+              new Container (
+                margin: new EdgeInsets.symmetric(horizontal: 30.0),
+                child: new Divider(
+                  color: Colors.black45,
+                  height: 5.0,
+                )
+              ),
+              new Container (
+                child: new Row (
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  new Container (
+                      width: MediaQuery.of(context).size.width*0.7,
+                      alignment: Alignment(-1.0, -1.0),
+                      margin: new EdgeInsets.all(20.0),
+                      child: const Text.rich(
+                        TextSpan(
+                          children: <TextSpan>[
+                            TextSpan(text: 'Larry B\n\n', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40.0)),
+                            TextSpan(text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
+                                'Donec iaculis velit sed euismod eleifend. Aliquam neque arcu, convallis\n\n'
+                                'Vel urna quis, pulvinar placerat justo. Aliquam ultricies leo non lectus '
+                                'eleifend ultrices. Mauris ullamcorper, orci a malesuada dictum, '
+                                'quam augue sagittis sapien\n\n'
+                                , style: TextStyle(fontSize: 14.0)),
+                            TextSpan(text: 'What inspires you?\n\n'
+                                , style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black87)),
+                            TextSpan(text: 'Food, food is my true inspiration. I do not know where I would be without it.'
+                                , style: TextStyle(fontSize: 14.0)),
+                          ],
+                        ),
+                      )
+                      ),
+                      /*** SOCIAL ICONS ***/
+                      new Container(
+                        margin: new EdgeInsets.only(top: 70.0),
+                        alignment: Alignment.topCenter,
+                        child: Column(
+                          children: [
+                            new IconButton(
+                                icon: new Icon(FontAwesomeIcons.instagram),
+                                iconSize: 30.0,
+                                color: Colors.black54),
+                            new IconButton(
+                                icon: new Icon(FontAwesomeIcons.facebook),
+                                iconSize: 30.0,
+                                color: Colors.black54),
+                            new IconButton(
+                                icon: new Icon(FontAwesomeIcons.twitter),
+                                iconSize: 30.0,
+                                color: Colors.black54),
+                            new IconButton(
+                                icon: new Icon(FontAwesomeIcons.spotify),
+                                iconSize: 30.0,
+                                color: Colors.black54),
+                          ]
+                        )
+                      )
+                    ]
+                )
+              )
+            ]
+          )
+          ),
+          /*** MUSIC PLAYER ***/
+          new Container(
+            alignment: Alignment.bottomCenter,
+            child: new Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                new Material(
+                  child:
+                  new Column(
+                    children: [
+                      _buildPlayer(),
+                        localFilePath != null
                         ? new Text(localFilePath)
                         : new Container(),
-                    new Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: new Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            new RaisedButton(
-                              onPressed: () => _loadFile(),
-                              child: new Text('Download'),
-                            ),
-                            new RaisedButton(
-                              onPressed: () => _playLocal(),
-                              child: new Text('play local'),
-                            ),
-                          ]),
-                    )
-                  ]),
-            )));
+                    ]
+                  ),
+                ),
+              ]
+            ),
+          )
+        ]
+    )
+  );
   }
 
+
   Widget _buildPlayer() => new Container(
-      padding: new EdgeInsets.all(16.0),
-      child: new Column(mainAxisSize: MainAxisSize.min, children: [
-        new Row(mainAxisSize: MainAxisSize.min, children: [
-          new IconButton(
-              onPressed: isPlaying ? null : () => play(),
-              iconSize: 64.0,
-              icon: new Icon(Icons.play_arrow),
-              color: Colors.amber),
-          new IconButton(
-              onPressed: isPlaying ? () => pause() : null,
-              iconSize: 64.0,
-              icon: new Icon(Icons.pause),
-              color: Colors.cyan),
-          new IconButton(
-              onPressed: isPlaying || isPaused ? () => stop() : null,
-              iconSize: 64.0,
-              icon: new Icon(Icons.stop),
-              color: Colors.cyan),
-        ]),
-        duration == null
-            ? new Container()
-            : new Slider(
-            value: position?.inMilliseconds?.toDouble() ?? 0.0,
-            onChanged: (double value) =>
-                audioPlayer.seek((value / 1000).roundToDouble()),
-            min: 0.0,
-            max: duration.inMilliseconds.toDouble()),
-        new Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            new IconButton(
-                onPressed: () => mute(true),
-                icon: new Icon(Icons.headset_off),
-                color: Colors.cyan),
-            new IconButton(
-                onPressed: () => mute(false),
-                icon: new Icon(Icons.headset),
-                color: Colors.cyan),
-          ],
+      padding: new EdgeInsets.all(10.0),
+      child: new Column(children: [
+        new Text(
+            'Baltimore Radio: Livin On A Prayer',
+            style: TextStyle(color: Colors.redAccent)
         ),
-        new Row(mainAxisSize: MainAxisSize.min, children: [
-          new Padding(
-              padding: new EdgeInsets.all(12.0),
-              child: new Stack(children: [
-                new CircularProgressIndicator(
-                    value: 1.0,
-                    valueColor: new AlwaysStoppedAnimation(Colors.grey[300])),
-                new CircularProgressIndicator(
-                  value: position != null && position.inMilliseconds > 0
-                      ? (position?.inMilliseconds?.toDouble() ?? 0.0) /
-                      (duration?.inMilliseconds?.toDouble() ?? 0.0)
-                      : 0.0,
-                  valueColor: new AlwaysStoppedAnimation(Colors.cyan),
-                  backgroundColor: Colors.yellow,
-                ),
-              ])),
+        new Row(mainAxisSize: MainAxisSize.max, children: [
           new Text(
               position != null
-                  ? "${positionText ?? ''} / ${durationText ?? ''}"
+                  ? "${positionText ?? ''}"
                   : duration != null ? durationText : '',
-              style: new TextStyle(fontSize: 24.0))
+              style: new TextStyle(color: Colors.redAccent, fontSize: 14.0),
+          ),
+          Expanded(
+
+            child: duration == null
+                ? new Slider(
+                value: 0.0,
+                min: 0.0,
+                max: 0.0,
+                activeColor: Colors.redAccent
+            )
+                : new Slider(
+                value: position.inMilliseconds?.toDouble() ?? 0.0,
+                onChanged: (double value) =>
+                    audioPlayer.seek((value / 1000).roundToDouble()),
+                min: 0.0,
+                max: duration.inMilliseconds.toDouble(),
+                activeColor: Colors.redAccent
+            )
+          ),
+          new Text(
+              position != null
+                  ? "${durationText ?? ''}"
+                  : duration != null ? durationText : '',
+            style: new TextStyle(color: Colors.redAccent, fontSize: 14.0),
+          )
+        ]),
+        new Row(mainAxisSize: MainAxisSize.min, children: [
+          new IconButton(
+              onPressed: () => mute(true),
+              icon: new Icon(Icons.star_border),
+              color: Colors.redAccent),
+          new IconButton(
+              onPressed: () => play(),
+              iconSize: 64.0,
+              icon: new Icon(Icons.arrow_left),
+              color: Colors.redAccent),
+          new IconButton(
+              onPressed: isPlaying ? () => pause() : () => play(),
+              iconSize: 64.0,
+              icon: (isPlaying ? Icon(Icons.pause_circle_filled) : Icon(Icons.play_circle_filled)),
+              color: Colors.redAccent),
+          new IconButton(
+              onPressed: () => nextSong(),
+              iconSize: 64.0,
+              icon: new Icon(Icons.arrow_right),
+              color: Colors.redAccent),
+          new IconButton(
+              onPressed: () => mute(false),
+              icon: new Icon(Icons.queue_music),
+              color: Colors.redAccent),
+        ]),
+
+//        new Row(
+//          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//          children: <Widget>[
+//            new IconButton(
+//                onPressed: () => mute(true),
+//                icon: new Icon(Icons.headset_off),
+//                color: Colors.cyan),
+//            new IconButton(
+//                onPressed: () => mute(false),
+//                icon: new Icon(Icons.headset),
+//                color: Colors.cyan),
+//          ],
+//        ),
+        new Row(mainAxisSize: MainAxisSize.min, children: [
+//          new Padding(
+//              padding: new EdgeInsets.all(12.0),
+//              child: new Stack(children: [
+//                new CircularProgressIndicator(
+//                    value: 1.0,
+//                    valueColor: new AlwaysStoppedAnimation(Colors.grey[300])),
+//                new CircularProgressIndicator(
+//                  value: position != null && position.inMilliseconds > 0
+//                      ? (position?.inMilliseconds?.toDouble() ?? 0.0) /
+//                      (duration?.inMilliseconds?.toDouble() ?? 0.0)
+//                      : 0.0,
+//                  valueColor: new AlwaysStoppedAnimation(Colors.cyan),
+//                  backgroundColor: Colors.yellow,
+//                ),
+//              ])),
+//          new Text(
+//              position != null
+//                  ? "${positionText ?? ''} / ${durationText ?? ''}"
+//                  : duration != null ? durationText : '',
+//              style: new TextStyle(fontSize: 24.0))
         ])
       ]));
 }

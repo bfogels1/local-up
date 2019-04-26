@@ -29,6 +29,7 @@ def create_app():
     ARTISTS = db.reference('artists')
     SONGS = db.reference('songs')
     RADIOS = db.reference('radios')
+    CONCERTS = db.reference('concerts')
 
     @app.route('/users/create', methods=['POST'])
     def create_user():
@@ -62,8 +63,6 @@ def create_app():
         for key, val in snapshot.items():
             retrieved_password = val['password']
 
-        print(retrieved_password)
-        print(encoded_password)
         if not snapshot:
             return jsonify({'message': 'Invalid Email'}), 400
         if retrieved_password != encoded_password:
@@ -76,10 +75,11 @@ def create_app():
 
         name = req["name"]
         email = req["email"]
+        bio = req["bio"]
         encoded_password = encode_password(req["password"])
-        twitter = req['twitter']
-        insta = req['insta']
-        fb = req['fb']
+        twitter = req["twitter"]
+        insta = req["insta"]
+        fb = req["fb"]
         
         snapshot = ARTISTS.order_by_child('email').equal_to(email).get()
         if snapshot:
@@ -89,9 +89,11 @@ def create_app():
             'name': name,
             'email': email,
             'password': encoded_password,
+            'bio': bio,
             'twitter' : twitter,
             'insta' : insta,
-            'fb' : fb
+            'fb' : fb,
+            'concert_ids': [""]
           });
 
         return jsonify({'id': artist.key}), 201
@@ -217,6 +219,60 @@ def create_app():
             url = val['url']
 
         return jsonify({'url': url}), 201
+
+
+    @app.route('/artists/add_concert', methods=['POST'])
+    def add_concert():
+        req = request.json
+
+        artist_name = req["artist_name"]
+        dates = req["dates"]
+        city = req["city"]
+
+        concert_uuid = uuid.uuid4()
+        concert_id = str(concert_uuid)
+
+
+        snapshot = ARTISTS.order_by_child('name').equal_to(artist_name).get()
+        if not snapshot:
+            return jsonify({'message': 'Invalid Artist Name'}), 400
+
+        for key, val in snapshot.items():
+            artist_id = key
+            email = val["email"]
+            bio = val["bio"]
+            encoded_password = val["password"]
+            twitter = val['twitter']
+            insta = val['insta']
+            fb = val['fb']
+            concert_ids = val['concert_ids']
+
+        concert_ids.append(concert_id)
+        concert_ids = list(filter(None, concert_ids))
+
+        artist_ref = ARTISTS.child(artist_id)
+
+        artist_ref.set({
+            'name': artist_name,
+            'email': email,
+            'bio': bio,
+            'password': encoded_password,
+            'twitter': twitter,
+            'insta': insta,
+            'fb': fb,
+            'concert_ids': concert_ids
+        })
+
+        concert = CONCERTS.push({
+            'artist_name': artist_name,
+            'dates': dates,
+            'city': city,
+            'concert_id': str(concert_id)
+          });
+
+        return jsonify({'id': concert.key}), 201
+
+        
 
 
     # @app.route('/radio/new', methods=['POST'])

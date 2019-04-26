@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
+      //home: new LoginScreen(),
       home: new AudioApp(),
       debugShowCheckedModeBanner: false,
     );

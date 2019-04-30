@@ -33,6 +33,12 @@ final List<String> imgList = [
   'https://images.unsplash.com/photo-1541428973141-3e739c202d9e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80'
 ];
 
+final List<String> imgListDeepEnd = [
+  'https://scontent-iad3-1.cdninstagram.com/vp/d1cf83d80cfe80fc60b842c6ed62d691/5D7026C4/t51.2885-15/e35/47694641_382201942585775_1964758380600414909_n.jpg?_nc_ht=scontent-iad3-1.cdninstagram.com',
+  'https://scontent-iad3-1.cdninstagram.com/vp/11b7e89844a01f22dfa41477a285b510/5D5236B9/t51.2885-15/e35/50574470_376739999550131_1391391369206455161_n.jpg?_nc_ht=scontent-iad3-1.cdninstagram.com',
+  'https://scontent-iad3-1.cdninstagram.com/vp/5ffb4bf568606076154848256f11c020/5D559ADF/t51.2885-15/e35/43054384_293767881243690_4971574116922731125_n.jpg?_nc_ht=scontent-iad3-1.cdninstagram.com'
+];
+
 
 void main() {
   runApp(new MaterialApp(home: new Scaffold(body: new AudioApp())));
@@ -220,7 +226,7 @@ class _AudioAppState extends State<AudioApp> {
                   enlargeCenterPage: true,
                   enableInfiniteScroll: true,
                   items: map<Widget>(
-                    imgList,
+                    imgListDeepEnd, //populated with deepend
                         (index, i) {
                       return Container(
                         margin: EdgeInsets.all(5.0),
@@ -257,16 +263,21 @@ class _AudioAppState extends State<AudioApp> {
                       child: const Text.rich(
                         TextSpan(
                           children: <TextSpan>[
-                            TextSpan(text: 'Larry B\n\n', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40.0)),
-                            TextSpan(text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
-                                'Donec iaculis velit sed euismod eleifend. Aliquam neque arcu, convallis\n\n'
-                                'Vel urna quis, pulvinar placerat justo. Aliquam ultricies leo non lectus '
-                                'eleifend ultrices. Mauris ullamcorper, orci a malesuada dictum, '
-                                'quam augue sagittis sapien\n\n'
+                            TextSpan(text: 'THE DEEP END\n\n', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 36.0)),
+                            TextSpan(text: 'Formed in 2017, THE DEEP END has gained attention for its resonant '
+                                'lyrics, diverse rhythms and soaring choruses. While the band\'s first single, heavy water, is '
+                                'noteworthy for its layered, lush production, THE DEEP END is built around crunching guitars  '
+                                'and a rock-solid rhythm section that drives its music unrelentingly forward. '
+                                'In an era where many have proclaimed rock music dead, THE DEEP END\'s music '
+                                'serves as a reminder of the genre\'s power and continued relevance. \n\n'
+                                , style: TextStyle(fontSize: 14.0)),
+                            TextSpan(text: 'Our mission:\n\n'
+                                , style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black87)),
+                            TextSpan(text: 'To provide the audience with a cathartic, high-quality live show, and keep them guessing. \n\n'
                                 , style: TextStyle(fontSize: 14.0)),
                             TextSpan(text: 'What inspires you?\n\n'
                                 , style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black87)),
-                            TextSpan(text: 'Food, food is my true inspiration. I do not know where I would be without it.'
+                            TextSpan(text: 'Food, food is our true inspiration. We do not know where we would be without it.'
                                 , style: TextStyle(fontSize: 14.0)),
                           ],
                         ),
@@ -334,7 +345,7 @@ class _AudioAppState extends State<AudioApp> {
       padding: new EdgeInsets.all(10.0),
       child: new Column(children: [
         new Text(
-            'Baltimore Radio: Livin On A Prayer',
+            'Baltimore Alternative Radio: Heavy Water',
             style: TextStyle(color: Colors.redAccent)
         ),
         new Row(mainAxisSize: MainAxisSize.max, children: [

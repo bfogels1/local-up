@@ -140,7 +140,7 @@ class _AudioAppState extends State<AudioApp> {
     var jsonResponse = jsonDecode(response.body);
     kUrl = jsonResponse['url'];
     print('Url: $kUrl');
-    pause();
+    stop();
     play();
   }
 
@@ -223,7 +223,8 @@ class _AudioAppState extends State<AudioApp> {
         children: [
           /*** SCROLLABLE LIST ***/
           new ConstrainedBox (
-            constraints: BoxConstraints.expand(height: MediaQuery.of(context).size.height*0.7),
+            //constraints: BoxConstraints.expand(height: MediaQuery.of(context).size.height*0.7),
+              constraints: BoxConstraints.expand(height: MediaQuery.of(context).size.height*0.663),
           child: new ListView (
             shrinkWrap: true,
             children: <Widget>[

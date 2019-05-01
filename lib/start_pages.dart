@@ -14,23 +14,30 @@ class StartPage extends StatelessWidget {
           fit: BoxFit.cover,
         ),
       ),
-      child: new Column(
-        children: <Widget>[
 
-          // LOGO
-          Container(
-            padding: EdgeInsets.only(top: 150.0),
-            child: Center(
+      child: Container(
+        child: new Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+
+            Container(
+            // LOGO
+              child: Center(
                 child: Image.asset('assets/images/localup_white.png')
+              ),
             ),
-          ),
+
+
 
           // SIGN UP BUTTON
-          new Container(
+          Container(
             width: MediaQuery.of(context).size.width,
-            margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 270.0),
+            //margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 270.0),
+            margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:30),
             alignment: Alignment.center,
             child: new Row(
+              mainAxisSize: MainAxisSize.max,
               children: <Widget>[
                 new Expanded(
                   child: new FlatButton(
@@ -66,8 +73,9 @@ class StartPage extends StatelessWidget {
             ),
           ),
 
+
           // LOG IN BUTTON
-          new Container(
+          Container(
             width: MediaQuery.of(context).size.width,
             margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 30.0),
             alignment: Alignment.center,
@@ -109,6 +117,7 @@ class StartPage extends StatelessWidget {
 
         ],
       ),
+    ),
     );
   }
 }
@@ -136,11 +145,12 @@ class LoginPage extends StatelessWidget {
         ),
         body: Center(
           child: new Column(
-            children: <Widget>[
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
 
               // LOGO
               Container(
-                padding: EdgeInsets.only(top: 50.0),
+                //padding: EdgeInsets.only(top: 50.0),
                 child: Center(
                     child: Image.asset('assets/images/localup_color.png')
                 ),
@@ -196,6 +206,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               Divider(
+                color: Colors.white.withOpacity(0.0),
                 height: 24.0,
               ),
 
@@ -249,6 +260,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               Divider(
+                color: Colors.white.withOpacity(0.0),
                 height: 24.0,
               ),
 
@@ -264,7 +276,7 @@ class LoginPage extends StatelessWidget {
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.redAccent,
-                          fontSize: 15.0,
+                          fontSize: 12.0,
                         ),
                         textAlign: TextAlign.end,
                       ),
@@ -275,7 +287,7 @@ class LoginPage extends StatelessWidget {
               ),
               new Container(
                 width: MediaQuery.of(context).size.width,
-                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 20.0),
+                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 10.0),
                 alignment: Alignment.center,
                 child: new Row(
                   children: <Widget>[
@@ -292,8 +304,8 @@ class LoginPage extends StatelessWidget {
                         },
                         child: new Container(
                           padding: const EdgeInsets.symmetric(
-                            vertical: 20.0,
-                            horizontal: 20.0,
+                            vertical: 15.0,
+                            horizontal: 15.0,
                           ),
                           child: new Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -347,7 +359,7 @@ class LoginPage extends StatelessWidget {
               ),
               new Container(
                 width: MediaQuery.of(context).size.width,
-                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 20.0),
+                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 10.0),
                 child: new Row(
                   children: <Widget>[
                     new Expanded(
@@ -371,8 +383,8 @@ class LoginPage extends StatelessWidget {
                                         child: new FlatButton(
                                           onPressed: ()=>{},
                                           padding: EdgeInsets.only(
-                                            top: 20.0,
-                                            bottom: 20.0,
+                                            top: 10.0,
+                                            bottom: 10.0,
                                           ),
                                           child: new Row(
                                             mainAxisAlignment:
@@ -425,8 +437,8 @@ class LoginPage extends StatelessWidget {
                                         child: new FlatButton(
                                           onPressed: () => {},
                                           padding: EdgeInsets.only(
-                                            top: 20.0,
-                                            bottom: 20.0,
+                                            top: 10.0,
+                                            bottom: 10.0,
                                           ),
                                           child: new Row(
                                             mainAxisAlignment:
@@ -492,9 +504,10 @@ class SignupPage extends StatelessWidget {
         ),
         body: Center(
           child: new Column(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               Container(
-                padding: EdgeInsets.only(top: 50.0),
+                //padding: EdgeInsets.only(top: 50.0),
                 child: Center(
                     child: Image.asset('assets/images/localup_color.png')
                 ),
@@ -550,6 +563,7 @@ class SignupPage extends StatelessWidget {
                 ),
               ),
               Divider(
+                color: Colors.white.withOpacity(0.0),
                 height: 24.0,
               ),
 
@@ -603,6 +617,7 @@ class SignupPage extends StatelessWidget {
                 ),
               ),
               Divider(
+                color: Colors.white.withOpacity(0.0),
                 height: 24.0,
               ),
               new Row(
@@ -654,6 +669,7 @@ class SignupPage extends StatelessWidget {
                 ),
               ),
               Divider(
+                color: Colors.white.withOpacity(0.0),
                 height: 24.0,
               ),
 
@@ -669,7 +685,7 @@ class SignupPage extends StatelessWidget {
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.redAccent,
-                          fontSize: 15.0,
+                          fontSize: 12.0,
                         ),
                         textAlign: TextAlign.end,
                       ),
@@ -684,7 +700,7 @@ class SignupPage extends StatelessWidget {
               // CONTINUE
               new Container(
                 width: MediaQuery.of(context).size.width,
-                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 50.0),
+                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 10), //50.0),
                 alignment: Alignment.center,
                 child: new Row(
                   children: <Widget>[
@@ -700,7 +716,7 @@ class SignupPage extends StatelessWidget {
                         },
                         child: new Container(
                           padding: const EdgeInsets.symmetric(
-                            vertical: 20.0,
+                            vertical: 15.0,
                             horizontal: 20.0,
                           ),
                           child: new Row(

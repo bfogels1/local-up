@@ -173,6 +173,7 @@ class _AudioAppState extends State<AudioApp> {
 
   void onComplete() {
     setState(() => playerState = PlayerState.stopped);
+    nextSong();
   }
 
   Future<Uint8List> _loadFileBytes(String url, {OnError onError}) async {
@@ -336,6 +337,7 @@ class _AudioAppState extends State<AudioApp> {
                   new Column(
                     children: [
                       _buildPlayer(),
+
                         localFilePath != null
                         ? new Text(localFilePath)
                         : new Container(),
@@ -367,14 +369,15 @@ class _AudioAppState extends State<AudioApp> {
           ),
           Expanded(
 
-            child: duration == null
+            child: duration == null || position == null
                 ? new Slider(
                 value: 0.0,
                 min: 0.0,
-                max: 0.0,
+                max: 1.0,
                 activeColor: Colors.redAccent
-            )
-                : new Slider(
+                )
+                :
+                new Slider(
                 value: position.inMilliseconds?.toDouble() ?? 0.0,
                 onChanged: (double value) =>
                     audioPlayer.seek((value / 1000).roundToDouble()),

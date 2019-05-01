@@ -303,17 +303,20 @@ class _AudioAppState extends State<AudioApp> {
                       width: MediaQuery.of(context).size.width*0.7,
                       alignment: Alignment(-1.0, -1.0),
                       margin: new EdgeInsets.all(20.0),
-                      child: const Text.rich(
+                      //child: const Text.rich(
+                      child: Text.rich(
                         TextSpan(
                           children: <TextSpan>[
-                            TextSpan(text: 'THE DEEP END\n\n', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 36.0)),
-                            //TextSpan(text: artist + '\n\n', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 36.0)),
-                            TextSpan(text: 'Formed in 2017, THE DEEP END has gained attention for its resonant '
+                            //TextSpan(text: 'THE DEEP END\n\n', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 36.0)),
+                            TextSpan(text: artist + '\n\n', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 36.0)),
+                            /*TextSpan(text: 'Formed in 2017, THE DEEP END has gained attention for its resonant '
                                 'lyrics, diverse rhythms and soaring choruses. While the band\'s first single, heavy water, is '
                                 'noteworthy for its layered, lush production, THE DEEP END is built around crunching guitars  '
                                 'and a rock-solid rhythm section that drives its music unrelentingly forward. '
                                 'In an era where many have proclaimed rock music dead, THE DEEP END\'s music '
                                 'serves as a reminder of the genre\'s power and continued relevance. \n\n'
+                                , style: TextStyle(fontSize: 14.0)),*/
+                            TextSpan(text: bio + '\n\n'
                                 , style: TextStyle(fontSize: 14.0)),
                             TextSpan(text: 'Our mission:\n\n'
                                 , style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black87)),

@@ -14,7 +14,15 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 typedef void OnError(Exception exception);
 
-var kUrl = "https://s1.vocaroo.com/media/download_temp/Vocaroo_s14lqdIffPud.mp3";
+var kUrl = 'https://s0.vocaroo.com/media/download_temp/Vocaroo_s02PXvSfMGrO.mp3';
+var artist = 'THE DEEP END';
+var song = 'Heavy Water';
+var bio = 'Formed in 2017, THE DEEP END has gained attention for its resonant '
+    'lyrics, diverse rhythms and soaring choruses. While the band\'s first single, heavy water, is '
+    'noteworthy for its layered, lush production, THE DEEP END is built around crunching guitars  '
+    'and a rock-solid rhythm section that drives its music unrelentingly forward. '
+    'In an era where many have proclaimed rock music dead, THE DEEP END\'s music '
+    'serves as a reminder of the genre\'s power and continued relevance. \n\n';
 
 List<T> map<T>(List list, Function handler) {
   List<T> result = [];
@@ -25,6 +33,7 @@ List<T> map<T>(List list, Function handler) {
   return result;
 }
 
+/*
 List<String> imgList = [
   'https://images.unsplash.com/photo-1522863602463-afebb8886ab2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
   'https://images.unsplash.com/photo-1522536421511-14c9073df899?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
@@ -32,8 +41,9 @@ List<String> imgList = [
   'https://images.unsplash.com/photo-1550056462-07f9fa8fb9b8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1376&q=80',
   'https://images.unsplash.com/photo-1541428973141-3e739c202d9e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80'
 ];
+*/
 
-List<String> imgListDeepEnd = [
+List<String> imgList = [
   'https://scontent-iad3-1.cdninstagram.com/vp/d1cf83d80cfe80fc60b842c6ed62d691/5D7026C4/t51.2885-15/e35/47694641_382201942585775_1964758380600414909_n.jpg?_nc_ht=scontent-iad3-1.cdninstagram.com',
   'https://scontent-iad3-1.cdninstagram.com/vp/11b7e89844a01f22dfa41477a285b510/5D5236B9/t51.2885-15/e35/50574470_376739999550131_1391391369206455161_n.jpg?_nc_ht=scontent-iad3-1.cdninstagram.com',
   'https://scontent-iad3-1.cdninstagram.com/vp/5ffb4bf568606076154848256f11c020/5D559ADF/t51.2885-15/e35/43054384_293767881243690_4971574116922731125_n.jpg?_nc_ht=scontent-iad3-1.cdninstagram.com'
@@ -142,6 +152,28 @@ class _AudioAppState extends State<AudioApp> {
     print('Url: $kUrl');
     stop();
     play();
+    updateInfo();
+  }
+
+  Future updateInfo() async {
+    var url = 'https://local-up-heroku.herokuapp.com/radio/get_info';
+    var response = await post(
+        url,
+        headers: {
+          "Content-Type": "application/json",
+          'Accept': 'application/json'},
+        body: json.encode({'url': kUrl}));
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
+    var jsonResponse = jsonDecode(response.body);
+    var pics = jsonResponse['pics'];
+    //imgList = pics.Cast<String>().ToList();
+    imgList = pics.cast<String>();
+    //imgList = pics;
+    artist = jsonResponse['artist'];
+    song = jsonResponse['song'];
+    bio = jsonResponse['bio'];
+
   }
 
   Future _playLocal() async {
@@ -237,7 +269,7 @@ class _AudioAppState extends State<AudioApp> {
                   enlargeCenterPage: true,
                   enableInfiniteScroll: true,
                   items: map<Widget>(
-                    imgListDeepEnd, //populated with deepend
+                    imgList, //populated with deepend
                         (index, i) {
                       return Container(
                         margin: EdgeInsets.all(5.0),
@@ -275,6 +307,7 @@ class _AudioAppState extends State<AudioApp> {
                         TextSpan(
                           children: <TextSpan>[
                             TextSpan(text: 'THE DEEP END\n\n', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 36.0)),
+                            //TextSpan(text: artist + '\n\n', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 36.0)),
                             TextSpan(text: 'Formed in 2017, THE DEEP END has gained attention for its resonant '
                                 'lyrics, diverse rhythms and soaring choruses. While the band\'s first single, heavy water, is '
                                 'noteworthy for its layered, lush production, THE DEEP END is built around crunching guitars  '
@@ -357,7 +390,7 @@ class _AudioAppState extends State<AudioApp> {
       padding: new EdgeInsets.all(10.0),
       child: new Column(children: [
         new Text(
-            'Baltimore Alternative Radio: Heavy Water',
+            'Baltimore Alternative Radio: ' + song,
             style: TextStyle(color: Colors.redAccent)
         ),
         new Row(mainAxisSize: MainAxisSize.max, children: [

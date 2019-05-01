@@ -221,6 +221,39 @@ def create_app():
         return jsonify({'url': url}), 201
 
 
+
+    # @app.route('/radio/get_info', methods=['POST'])
+    # def get_info():
+    #     req = request.json
+    #     url = req["url"]
+
+    #     snapshot = SONGS.order_by_child('url').equal_to(url).get()
+    #     for key, val in snapshot.items():
+    #         artist = val['artist']
+    #         song_name = val['song_name']
+
+    #     snapshot = ARTISTS.order_by_child('name').equal_to(artist).get()
+    #     for key,val in snapshot.items():
+    #         bio = val['bio']
+    #         fb = val['fb']
+    #         insta = val['insta']
+    #         twitter = val['twitter']
+    #         concert_ids = val['concert_ids']
+    #         #questions = val['questions']
+    #         #answers = val['answers']
+
+    #     return jsonify({
+    #         'song': random_song,
+    #         'artist' : artist,
+    #         'pics' : pics,
+    #         'bio' : bio,
+    #         'questions': questions,
+    #         'concerts' : concert
+    #         }), 201
+
+
+
+
     @app.route('/artists/add_concert', methods=['POST'])
     def add_concert():
         req = request.json

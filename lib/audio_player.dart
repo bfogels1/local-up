@@ -224,7 +224,7 @@ class _AudioAppState extends State<AudioApp> {
           /*** SCROLLABLE LIST ***/
           new ConstrainedBox (
             //constraints: BoxConstraints.expand(height: MediaQuery.of(context).size.height*0.7),
-              constraints: BoxConstraints.expand(height: MediaQuery.of(context).size.height*0.663),
+              constraints: BoxConstraints.expand(height: MediaQuery.of(context).size.height*0.66),
           child: new ListView (
             shrinkWrap: true,
             children: <Widget>[
@@ -379,7 +379,7 @@ class _AudioAppState extends State<AudioApp> {
                 onChanged: (double value) =>
                     audioPlayer.seek((value / 1000).roundToDouble()),
                 min: 0.0,
-                max: duration.inMilliseconds.toDouble(),
+                max: duration.inMilliseconds?.toDouble() ?? 1.0,
                 activeColor: Colors.redAccent
             )
           ),

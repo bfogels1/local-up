@@ -173,7 +173,7 @@ class _AudioAppState extends State<AudioApp> {
 
   void onComplete() {
     setState(() => playerState = PlayerState.stopped);
-    nextSong();
+    //nextSong();
   }
 
   Future<Uint8List> _loadFileBytes(String url, {OnError onError}) async {

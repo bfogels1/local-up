@@ -14,7 +14,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 typedef void OnError(Exception exception);
 
-const kUrl = "https://s1.vocaroo.com/media/download_temp/Vocaroo_s14lqdIffPud.mp3";
+var kUrl = "https://s1.vocaroo.com/media/download_temp/Vocaroo_s14lqdIffPud.mp3";
 
 List<T> map<T>(List list, Function handler) {
   List<T> result = [];
@@ -124,15 +124,24 @@ class _AudioAppState extends State<AudioApp> {
   }
 
   Future nextSong() async {
-    var url = 'http://127.0.0.1:5000/users/next_song';
+    //var url = 'http://127.0.0.1:5000/users/next_song';
+    print('Url: $kUrl');
+
+
+    var url = 'https://local-up-heroku.herokuapp.com/users/next_song';
     var response = await post(
         url,
         headers: {
         "Content-Type": "application/json",
         'Accept': 'application/json'},
         body: json.encode({'radio_name': 'LocalUp Radio'}));
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    //print('Response status: ${response.statusCode}');
+    //print('Response body: ${response.body}');
+    var jsonResponse = jsonDecode(response.body);
+    kUrl = jsonResponse['url'];
+    print('Url: $kUrl');
+    stop();
+    play();
   }
 
   Future _playLocal() async {
@@ -214,7 +223,8 @@ class _AudioAppState extends State<AudioApp> {
         children: [
           /*** SCROLLABLE LIST ***/
           new ConstrainedBox (
-            constraints: BoxConstraints.expand(height: MediaQuery.of(context).size.height*0.7),
+            //constraints: BoxConstraints.expand(height: MediaQuery.of(context).size.height*0.7),
+              constraints: BoxConstraints.expand(height: MediaQuery.of(context).size.height*0.663),
           child: new ListView (
             shrinkWrap: true,
             children: <Widget>[

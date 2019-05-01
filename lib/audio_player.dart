@@ -25,7 +25,7 @@ List<T> map<T>(List list, Function handler) {
   return result;
 }
 
-final List<String> imgList = [
+List<String> imgList = [
   'https://images.unsplash.com/photo-1522863602463-afebb8886ab2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
   'https://images.unsplash.com/photo-1522536421511-14c9073df899?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
   'https://images.unsplash.com/photo-1508695666381-69deeaa78ccb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80',
@@ -33,7 +33,7 @@ final List<String> imgList = [
   'https://images.unsplash.com/photo-1541428973141-3e739c202d9e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80'
 ];
 
-final List<String> imgListDeepEnd = [
+List<String> imgListDeepEnd = [
   'https://scontent-iad3-1.cdninstagram.com/vp/d1cf83d80cfe80fc60b842c6ed62d691/5D7026C4/t51.2885-15/e35/47694641_382201942585775_1964758380600414909_n.jpg?_nc_ht=scontent-iad3-1.cdninstagram.com',
   'https://scontent-iad3-1.cdninstagram.com/vp/11b7e89844a01f22dfa41477a285b510/5D5236B9/t51.2885-15/e35/50574470_376739999550131_1391391369206455161_n.jpg?_nc_ht=scontent-iad3-1.cdninstagram.com',
   'https://scontent-iad3-1.cdninstagram.com/vp/5ffb4bf568606076154848256f11c020/5D559ADF/t51.2885-15/e35/43054384_293767881243690_4971574116922731125_n.jpg?_nc_ht=scontent-iad3-1.cdninstagram.com'

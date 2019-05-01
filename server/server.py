@@ -93,7 +93,8 @@ def create_app():
             'twitter' : twitter,
             'insta' : insta,
             'fb' : fb,
-            'concert_ids': [""]
+            'concert_ids': [""],
+            'pics': [""]
           });
 
         return jsonify({'id': artist.key}), 201
@@ -222,36 +223,71 @@ def create_app():
 
 
 
-    # @app.route('/radio/get_info', methods=['POST'])
-    # def get_info():
-    #     req = request.json
-    #     url = req["url"]
+    @app.route('/radio/get_info', methods=['POST'])
+    def get_info():
+        req = request.json
+        url = req["url"]
 
-    #     snapshot = SONGS.order_by_child('url').equal_to(url).get()
-    #     for key, val in snapshot.items():
-    #         artist = val['artist']
-    #         song_name = val['song_name']
+        snapshot = SONGS.order_by_child('url').equal_to(url).get()
+        for key, val in snapshot.items():
+            artist = val['artist']
+            song_name = val['song_name']
 
-    #     snapshot = ARTISTS.order_by_child('name').equal_to(artist).get()
-    #     for key,val in snapshot.items():
-    #         bio = val['bio']
-    #         fb = val['fb']
-    #         insta = val['insta']
-    #         twitter = val['twitter']
-    #         concert_ids = val['concert_ids']
-    #         #questions = val['questions']
-    #         #answers = val['answers']
+        snapshot = ARTISTS.order_by_child('name').equal_to(artist).get()
+        for key,val in snapshot.items():
+            bio = val['bio']
+            #fb = val['fb']
+            #insta = val['insta']
+            #twitter = val['twitter']
+            #concert_ids = val['concert_ids']
+            pics = val['pics']
 
-    #     return jsonify({
-    #         'song': random_song,
-    #         'artist' : artist,
-    #         'pics' : pics,
-    #         'bio' : bio,
-    #         'questions': questions,
-    #         'concerts' : concert
-    #         }), 201
+        return jsonify({
+            'song': song_name,
+            'artist' : artist,
+            'pics' : pics,
+            'bio' : bio
+            }), 201
 
 
+    @app.route('/artists/add_pics', methods=['POST'])
+    def add_pics():
+        req = request.json
+
+        artist = req["artist"]
+        pics = req["pics"]
+
+        snapshot = ARTISTS.order_by_child('name').equal_to(artist).get()
+        if not snapshot:
+            return jsonify({'message': 'Invalid Artist Name'}), 400
+
+        for key, val in snapshot.items():
+            artist_id = key
+            email = val["email"]
+            bio = val["bio"]
+            encoded_password = val["password"]
+            twitter = val['twitter']
+            insta = val['insta']
+            fb = val['fb']
+            concert_ids = val['concert_ids']
+            #pics = val['pics']
+
+        artist_ref = ARTISTS.child(artist_id)
+
+        artist_ref.set({
+            'name': artist,
+            'email': email,
+            'bio': bio,
+            'password': encoded_password,
+            'twitter': twitter,
+            'insta': insta,
+            'fb': fb,
+            'concert_ids': concert_ids,
+            'pics': pics
+        })
+
+        return jsonify({'message': 'success'}), 201
+        
 
 
     @app.route('/artists/add_concert', methods=['POST'])
@@ -279,6 +315,7 @@ def create_app():
             insta = val['insta']
             fb = val['fb']
             concert_ids = val['concert_ids']
+            pics = val['pics']
 
         concert_ids.append(concert_id)
         concert_ids = list(filter(None, concert_ids))
@@ -293,7 +330,8 @@ def create_app():
             'twitter': twitter,
             'insta': insta,
             'fb': fb,
-            'concert_ids': concert_ids
+            'concert_ids': concert_ids,
+            'pics': pics
         })
 
         concert = CONCERTS.push({

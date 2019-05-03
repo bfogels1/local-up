@@ -9,6 +9,8 @@ void main() {
       // context from BuildContext
       '/Login': (context) => LoginPage(),
       '/Signup': (context) => SignupPage(),
+      '/GenrePage': (context) => GenrePage(),
+
       '/AudioPlayer': (context) => AudioApp(),
     },
   ));

@@ -17,24 +17,22 @@ class StartPage extends StatelessWidget {
 
       child: Container(
         child: new Column(
+
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-
             Container(
             // LOGO
               child: Center(
+                  // padding: EdgeInsets.only(top: 50.0),
                 child: Image.asset('assets/images/localup_white.png')
               ),
             ),
 
-
-
           // SIGN UP BUTTON
           Container(
             width: MediaQuery.of(context).size.width,
-            //margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 270.0),
-            margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:30),
+            margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 260),
             alignment: Alignment.center,
             child: new Row(
               mainAxisSize: MainAxisSize.max,
@@ -145,12 +143,11 @@ class LoginPage extends StatelessWidget {
         ),
         body: Center(
           child: new Column(
-              mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
 
               // LOGO
               Container(
-                //padding: EdgeInsets.only(top: 50.0),
+                padding: EdgeInsets.only(top: 50.0),
                 child: Center(
                     child: Image.asset('assets/images/localup_color.png')
                 ),
@@ -495,6 +492,7 @@ class SignupPage extends StatelessWidget {
           fit: BoxFit.cover,
         ),
       ),
+
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
@@ -504,10 +502,9 @@ class SignupPage extends StatelessWidget {
         ),
         body: Center(
           child: new Column(
-            mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               Container(
-                //padding: EdgeInsets.only(top: 50.0),
+                padding: EdgeInsets.only(top: 50.0),
                 child: Center(
                     child: Image.asset('assets/images/localup_color.png')
                 ),
@@ -717,6 +714,447 @@ class SignupPage extends StatelessWidget {
                         child: new Container(
                           padding: const EdgeInsets.symmetric(
                             vertical: 15.0,
+                            horizontal: 20.0,
+                          ),
+                          child: new Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              new Expanded(
+                                child: Text(
+                                  "CONTINUE",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// class statefulWidgetName extends widget
+// class Name extends statefulWidgetName
+// class nameState extends state<Name>
+
+class GenrePage extends StatefulWidget {
+  const GenrePage({ Key key }) : super(key: key);
+//  const GenrePage({
+//    Key key,
+//    this.color: const Color(0xFFFFE306)
+//    this.child,
+//  }) : super(key: key);
+//
+
+  @override
+  _GenrePageState createState() => _GenrePageState();
+}
+
+class _GenrePageState extends State<GenrePage> {
+
+  // INITIALIZING GENRE SLIDERS
+  double _popSliderValue = 2.0;
+  double _rapSliderValue = 2.0;
+  double _rbSliderValue = 2.0;
+  double _rockSliderValue = 2.0;
+  double _classicalSliderValue = 2.0;
+  double _edmSliderValue = 2.0;
+  double _hiphopSliderValue = 2.0;
+  double _altindieSliderValue = 2.0;
+
+
+  @override
+  Widget build(BuildContext context) {
+    return new Container(
+      height: MediaQuery.of(context).size.height,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        image: DecorationImage(
+          colorFilter: new ColorFilter.mode(
+              Colors.white.withOpacity(0.05), BlendMode.dstATop),
+          image: AssetImage('assets/images/mic.jpeg'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          title: Icon(Icons.menu),
+          backgroundColor: Color(0x00000000),
+          elevation: 0.0,
+        ),
+        body: Center(
+          child: new Column(
+            children: <Widget>[
+
+              // LOGO
+              Container(
+                padding: EdgeInsets.only(top: 5.0),
+                child: Center(
+                    child: Image.asset('assets/images/localup_color.png')
+                ),
+              ),
+
+              // POP
+              new Row(
+                children: <Widget>[
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(left: 40.0),
+                      child: new Text(
+                        "POP",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              new Container(
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:
+                20.0),
+                alignment: Alignment.center,
+                child: new Row(
+                  children: <Widget>[
+                    new Expanded(
+                      child: Slider(
+                        activeColor: Colors.redAccent,
+                        min: 0.0,
+                        max: 5.0,
+                        divisions: 4,
+                        onChanged: (newRating) {
+                          setState(() => _popSliderValue = newRating);
+                        },
+                        value: _popSliderValue,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+//              new Container(
+//                width: ,
+//              ),
+
+              // RAP
+              new Row(
+                children: <Widget>[
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(left: 40.0),
+                      child: new Text(
+                        "RAP",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              new Container(
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:
+                20.0),
+                alignment: Alignment.center,
+                child: new Row(
+                  children: <Widget>[
+                    new Expanded(
+                      child: Slider(
+                        activeColor: Colors.redAccent,
+                        min: 0.0,
+                        max: 5.0,
+                        divisions: 4,
+                        onChanged: (newRating) {
+                          setState(() => _rapSliderValue = newRating);
+                        },
+                        value: _rapSliderValue,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // R&B
+              new Row(
+                children: <Widget>[
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(left: 40.0),
+                      child: new Text(
+                        "R&B",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              new Container(
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:
+                20.0),
+                alignment: Alignment.center,
+                child: new Row(
+                  children: <Widget>[
+                    new Expanded(
+                      child: Slider(
+                        activeColor: Colors.redAccent,
+                        min: 0.0,
+                        max: 5.0,
+                        divisions: 4,
+                        onChanged: (newRating) {
+                          setState(() => _rbSliderValue = newRating);
+                        },
+                        value: _rbSliderValue,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // ROCK
+              new Row(
+                children: <Widget>[
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(left: 40.0),
+                      child: new Text(
+                        "Rock",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              new Container(
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:
+                20.0),
+                alignment: Alignment.center,
+                child: new Row(
+                  children: <Widget>[
+                    new Expanded(
+                      child: Slider(
+                        activeColor: Colors.redAccent,
+                        min: 0.0,
+                        max: 5.0,
+                        divisions: 4,
+                        onChanged: (newRating) {
+                          setState(() => _rockSliderValue = newRating);
+                        },
+                        value: _rockSliderValue,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // CLASSICAL
+              new Row(
+                children: <Widget>[
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(left: 40.0),
+                      child: new Text(
+                        "Classical",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              new Container(
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:
+                20.0),
+                alignment: Alignment.center,
+                child: new Row(
+                  children: <Widget>[
+                    new Expanded(
+                      child: Slider(
+                        activeColor: Colors.redAccent,
+                        min: 0.0,
+                        max: 5.0,
+                        divisions: 4,
+                        onChanged: (newRating) {
+                          setState(() => _classicalSliderValue = newRating);
+                        },
+                        value: _classicalSliderValue,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // EDM
+              new Row(
+                children: <Widget>[
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(left: 40.0),
+                      child: new Text(
+                        "EDM",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              new Container(
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:
+                20.0),
+                alignment: Alignment.center,
+                child: new Row(
+                  children: <Widget>[
+                    new Expanded(
+                      child: Slider(
+                        activeColor: Colors.redAccent,
+                        min: 0.0,
+                        max: 5.0,
+                        divisions: 4,
+                        onChanged: (newRating) {
+                          setState(() => _edmSliderValue = newRating);
+                        },
+                        value: _edmSliderValue,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // HIPHOP
+              new Row(
+                children: <Widget>[
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(left: 40.0),
+                      child: new Text(
+                        "Hip Hop",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              new Container(
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:
+                20.0),
+                alignment: Alignment.center,
+                child: new Row(
+                  children: <Widget>[
+                    new Expanded(
+                      child: Slider(
+                        activeColor: Colors.redAccent,
+                        min: 0.0,
+                        max: 5.0,
+                        divisions: 4,
+                        onChanged: (newRating) {
+                          setState(() => _hiphopSliderValue = newRating);
+                        },
+                        value: _hiphopSliderValue,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // ALTERNATIVE/INDIE
+              new Row(
+                children: <Widget>[
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(left: 40.0),
+                      child: new Text(
+                        "Alternative/Indie",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              new Container(
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:
+                20.0),
+                alignment: Alignment.center,
+                child: new Row(
+                  children: <Widget>[
+                    new Expanded(
+                      child: Slider(
+                        activeColor: Colors.redAccent,
+                        min: 0.0,
+                        max: 5.0,
+                        divisions: 4,
+                        onChanged: (newRating) {
+                          setState(() => _altindieSliderValue = newRating);
+                        },
+                        value: _altindieSliderValue,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // CONTINUE
+              new Container(
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 50.0),
+                alignment: Alignment.center,
+                child: new Row(
+                  children: <Widget>[
+                    new Expanded(
+                      child: new FlatButton(
+                        shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(30.0),
+                        ),
+                        color: Colors.redAccent,
+                        onPressed: () => {},
+                        child: new Container(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 20.0,
                             horizontal: 20.0,
                           ),
                           child: new Row(

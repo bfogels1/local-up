@@ -707,9 +707,8 @@ class SignupPage extends StatelessWidget {
                           borderRadius: new BorderRadius.circular(30.0),
                         ),
                         color: Colors.redAccent,
-                        // TODO change onPressed location to something relevant
                         onPressed: () {
-                          Navigator.pushNamed(context, '/Login');
+                          Navigator.pushNamed(context, '/GenrePage');
                         },
                         child: new Container(
                           padding: const EdgeInsets.symmetric(
@@ -774,7 +773,6 @@ class _GenrePageState extends State<GenrePage> {
   double _hiphopSliderValue = 2.0;
   double _altindieSliderValue = 2.0;
 
-
   @override
   Widget build(BuildContext context) {
     return new Container(
@@ -788,6 +786,7 @@ class _GenrePageState extends State<GenrePage> {
           fit: BoxFit.cover,
         ),
       ),
+
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
@@ -795,16 +794,34 @@ class _GenrePageState extends State<GenrePage> {
           backgroundColor: Color(0x00000000),
           elevation: 0.0,
         ),
-        body: Center(
+
+        //body: Center(
+        body: SingleChildScrollView(
           child: new Column(
             children: <Widget>[
 
-              // LOGO
-              Container(
-                padding: EdgeInsets.only(top: 5.0),
-                child: Center(
-                    child: Image.asset('assets/images/localup_color.png')
-                ),
+//              // LOGO
+//              Container(
+//                //padding: EdgeInsets.only(top: 5.0),
+//                child: Center(
+//                    child: Image.asset('assets/images/localup_color.png')
+//                ),
+//              ),
+
+              new Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Text(
+                      "Music Genre Preferences",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.redAccent,
+                        fontSize: 25.0,
+                      ),
+                    ),
+                  )
+                ],
               ),
 
               // POP
@@ -812,9 +829,10 @@ class _GenrePageState extends State<GenrePage> {
                 children: <Widget>[
                   new Expanded(
                     child: new Padding(
-                      padding: const EdgeInsets.only(left: 40.0),
+                      padding: const EdgeInsets.only(top: 20.0),
                       child: new Text(
                         "POP",
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.redAccent,
@@ -825,10 +843,43 @@ class _GenrePageState extends State<GenrePage> {
                   ),
                 ],
               ),
+              new Row(
+                children: <Widget>[
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(left: 20.0),
+                      child: new Text(
+                        "Hate it",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          //fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 15.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(right: 20.0),
+                      child: new Text(
+                        "Love it",
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                          //fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 15.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
               new Container(
                 width: MediaQuery.of(context).size.width,
-                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:
-                20.0),
+                margin: const EdgeInsets.only(
+                    left: 30.0, right: 30.0),
                 alignment: Alignment.center,
                 child: new Row(
                   children: <Widget>[
@@ -847,9 +898,6 @@ class _GenrePageState extends State<GenrePage> {
                   ],
                 ),
               ),
-//              new Container(
-//                width: ,
-//              ),
 
               // RAP
               new Row(
@@ -872,7 +920,7 @@ class _GenrePageState extends State<GenrePage> {
               new Container(
                 width: MediaQuery.of(context).size.width,
                 margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:
-                20.0),
+                10.0, bottom: 10.0),
                 alignment: Alignment.center,
                 child: new Row(
                   children: <Widget>[
@@ -913,7 +961,7 @@ class _GenrePageState extends State<GenrePage> {
               new Container(
                 width: MediaQuery.of(context).size.width,
                 margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:
-                20.0),
+                10.0, bottom: 10.0),
                 alignment: Alignment.center,
                 child: new Row(
                   children: <Widget>[
@@ -954,7 +1002,7 @@ class _GenrePageState extends State<GenrePage> {
               new Container(
                 width: MediaQuery.of(context).size.width,
                 margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:
-                20.0),
+                10.0, bottom: 10.0),
                 alignment: Alignment.center,
                 child: new Row(
                   children: <Widget>[
@@ -995,7 +1043,7 @@ class _GenrePageState extends State<GenrePage> {
               new Container(
                 width: MediaQuery.of(context).size.width,
                 margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:
-                20.0),
+                10.0, bottom: 10.0),
                 alignment: Alignment.center,
                 child: new Row(
                   children: <Widget>[
@@ -1036,7 +1084,7 @@ class _GenrePageState extends State<GenrePage> {
               new Container(
                 width: MediaQuery.of(context).size.width,
                 margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:
-                20.0),
+                10.0, bottom: 10.0),
                 alignment: Alignment.center,
                 child: new Row(
                   children: <Widget>[
@@ -1077,7 +1125,7 @@ class _GenrePageState extends State<GenrePage> {
               new Container(
                 width: MediaQuery.of(context).size.width,
                 margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:
-                20.0),
+                10.0, bottom: 10.0),
                 alignment: Alignment.center,
                 child: new Row(
                   children: <Widget>[
@@ -1118,7 +1166,7 @@ class _GenrePageState extends State<GenrePage> {
               new Container(
                 width: MediaQuery.of(context).size.width,
                 margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:
-                20.0),
+                10.0, bottom: 10.0),
                 alignment: Alignment.center,
                 child: new Row(
                   children: <Widget>[

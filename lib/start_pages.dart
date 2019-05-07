@@ -706,7 +706,7 @@ class SignupPage extends StatelessWidget {
                         ),
                         color: Colors.redAccent,
                         onPressed: () {
-                          Navigator.pushNamed(context, '/GenrePage');
+                          Navigator.pushNamed(context, '/LocationPage');
                         },
                         child: new Container(
                           padding: const EdgeInsets.symmetric(
@@ -719,6 +719,141 @@ class SignupPage extends StatelessWidget {
                               new Expanded(
                                 child: Text(
                                   "CONTINUE",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class LocationPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new Container(
+      height: MediaQuery.of(context).size.height,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        image: DecorationImage(
+          colorFilter: new ColorFilter.mode(
+              Colors.white.withOpacity(0.05), BlendMode.dstATop),
+          image: AssetImage('assets/images/mic.jpeg'),
+          fit: BoxFit.cover,
+        ),
+      ),
+
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          title: Icon(Icons.menu),
+          backgroundColor: Color(0x00000000),
+          elevation: 0.0,
+        ),
+        body: Center(
+          child: new Column(
+            children: <Widget>[
+              // TODO figure out what I'm doing
+//              new TextField(
+//                onChanged: ,
+//                decoration: ,
+//                controller: myController,
+//              ),
+              // Background
+              new Container(
+                padding: EdgeInsets.only(top: 20.0),
+                child: Center(
+                    child: Image.asset('assets/images/localup_color.png')
+                ),
+              ),
+              new Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Text(
+                      "Location Preferences",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.redAccent,
+                        fontSize: 25.0,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+
+              new Container(
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.only(left: 40.0, right: 40.0, top: 10.0),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                        color: Colors.redAccent,
+                        width: 0.5,
+                        style: BorderStyle.solid),
+                  ),
+                ),
+                padding: const EdgeInsets.only(left: 0.0, right: 10.0),
+                child: new Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    new Expanded(
+                      child: TextField(
+                        textAlign: TextAlign.left,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          // hintText: 'aronhime@jhu.edu',
+                          hintStyle: TextStyle(color: Colors.grey),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // CONTINUE
+              new Container(
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 50.0),
+                alignment: Alignment.center,
+                child: new Row(
+                  children: <Widget>[
+                    new Expanded(
+                      child: new FlatButton(
+                        shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(30.0),
+                        ),
+                        color: Colors.redAccent,
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/GenrePage');
+                        },
+                        child: new Container(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 20.0,
+                            horizontal: 20.0,
+                          ),
+                          child: new Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              new Expanded(
+                                child: Text(
+                                  "Continue",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       color: Colors.white,
@@ -1423,7 +1558,7 @@ class _GenrePageState extends State<GenrePage> {
                         ),
                         color: Colors.redAccent,
                         onPressed: () {
-                          Navigator.pushNamed(context, '/LocationPage');
+                          Navigator.pushNamed(context, '/AudioPlayer');
                         },
                         child: new Container(
                           padding: const EdgeInsets.symmetric(
@@ -1435,7 +1570,7 @@ class _GenrePageState extends State<GenrePage> {
                             children: <Widget>[
                               new Expanded(
                                 child: Text(
-                                  "CONTINUE",
+                                  "GO TO RADIO",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       color: Colors.white,
@@ -1444,116 +1579,6 @@ class _GenrePageState extends State<GenrePage> {
                               ),
                             ],
                           ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class LocationPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new Container(
-      height: MediaQuery.of(context).size.height,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        image: DecorationImage(
-          colorFilter: new ColorFilter.mode(
-          Colors.white.withOpacity(0.05), BlendMode.dstATop),
-          image: AssetImage('assets/images/mic.jpeg'),
-          fit: BoxFit.cover,
-        ),
-      ),
-
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          title: Icon(Icons.menu),
-          backgroundColor: Color(0x00000000),
-          elevation: 0.0,
-        ),
-        body: Center(
-          child: new Column(
-            children: <Widget>[
-              // TODO figure out what I'm doing
-//              new TextField(
-//                onChanged: ,
-//                decoration: ,
-//                controller: myController,
-//              ),
-              // Background
-              new Container(
-                padding: EdgeInsets.only(top: 20.0),
-                child: Center(
-                  child: Image.asset('assets/images/localup_color.png')
-                ),
-              ),
-              new Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      "Location Preferences",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.redAccent,
-                        fontSize: 25.0,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-
-//              new Row(
-//                children: <Widget>[
-//                  new Expanded(
-//                    child: new Padding(
-//                      padding: const EdgeInsets.only(left: 40.0),
-//                      child: new Text(
-//                        "EMAIL",
-//                        style: TextStyle(
-//                          fontWeight: FontWeight.bold,
-//                          color: Colors.redAccent,
-//                          fontSize: 15.0,
-//                        ),
-//                      ),
-//                    ),
-//                  ),
-//                ],
-//              ),
-              new Container(
-                width: MediaQuery.of(context).size.width,
-                margin: const EdgeInsets.only(left: 40.0, right: 40.0, top: 10.0),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                        color: Colors.redAccent,
-                        width: 0.5,
-                        style: BorderStyle.solid),
-                  ),
-                ),
-                padding: const EdgeInsets.only(left: 0.0, right: 10.0),
-                child: new Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    new Expanded(
-                      child: TextField(
-                        textAlign: TextAlign.left,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          // hintText: 'aronhime@jhu.edu',
-                          hintStyle: TextStyle(color: Colors.grey),
                         ),
                       ),
                     ),

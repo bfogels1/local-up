@@ -129,7 +129,7 @@ class LoginPage extends StatelessWidget {
         color: Colors.white,
         image: DecorationImage(
           colorFilter: new ColorFilter.mode(
-              Colors.white.withOpacity(0.05), BlendMode.dstATop),
+            Colors.white.withOpacity(0.05), BlendMode.dstATop),
           image: AssetImage('assets/images/mic.jpeg'),
           fit: BoxFit.cover,
         ),
@@ -190,7 +190,6 @@ class LoginPage extends StatelessWidget {
                   children: <Widget>[
                     new Expanded(
                       child: TextField(
-                        obscureText: true,
                         textAlign: TextAlign.left,
                         decoration: InputDecoration(
                           border: InputBorder.none,
@@ -547,7 +546,6 @@ class SignupPage extends StatelessWidget {
                   children: <Widget>[
                     new Expanded(
                       child: TextField(
-                        obscureText: true,
                         textAlign: TextAlign.left,
                         decoration: InputDecoration(
                           border: InputBorder.none,
@@ -744,10 +742,6 @@ class SignupPage extends StatelessWidget {
   }
 }
 
-// class statefulWidgetName extends widget
-// class Name extends statefulWidgetName
-// class nameState extends state<Name>
-
 class GenrePage extends StatefulWidget {
   const GenrePage({ Key key }) : super(key: key);
 //  const GenrePage({
@@ -760,7 +754,6 @@ class GenrePage extends StatefulWidget {
   @override
   _GenrePageState createState() => _GenrePageState();
 }
-
 class _GenrePageState extends State<GenrePage> {
 
   // INITIALIZING GENRE SLIDERS
@@ -795,7 +788,6 @@ class _GenrePageState extends State<GenrePage> {
           elevation: 0.0,
         ),
 
-        //body: Center(
         body: SingleChildScrollView(
           child: new Column(
             children: <Widget>[
@@ -1199,7 +1191,9 @@ class _GenrePageState extends State<GenrePage> {
                           borderRadius: new BorderRadius.circular(30.0),
                         ),
                         color: Colors.redAccent,
-                        onPressed: () => {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/LocationPage');
+                        },
                         child: new Container(
                           padding: const EdgeInsets.symmetric(
                             vertical: 20.0,
@@ -1219,6 +1213,116 @@ class _GenrePageState extends State<GenrePage> {
                               ),
                             ],
                           ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class LocationPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new Container(
+      height: MediaQuery.of(context).size.height,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        image: DecorationImage(
+          colorFilter: new ColorFilter.mode(
+          Colors.white.withOpacity(0.05), BlendMode.dstATop),
+          image: AssetImage('assets/images/mic.jpeg'),
+          fit: BoxFit.cover,
+        ),
+      ),
+
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          title: Icon(Icons.menu),
+          backgroundColor: Color(0x00000000),
+          elevation: 0.0,
+        ),
+        body: Center(
+          child: new Column(
+            children: <Widget>[
+              // TODO figure out what I'm doing
+//              new TextField(
+//                onChanged: ,
+//                decoration: ,
+//                controller: myController,
+//              ),
+              // Background
+              new Container(
+                padding: EdgeInsets.only(top: 20.0),
+                child: Center(
+                  child: Image.asset('assets/images/localup_color.png')
+                ),
+              ),
+              new Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Text(
+                      "Location Preferences",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.redAccent,
+                        fontSize: 25.0,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+
+//              new Row(
+//                children: <Widget>[
+//                  new Expanded(
+//                    child: new Padding(
+//                      padding: const EdgeInsets.only(left: 40.0),
+//                      child: new Text(
+//                        "EMAIL",
+//                        style: TextStyle(
+//                          fontWeight: FontWeight.bold,
+//                          color: Colors.redAccent,
+//                          fontSize: 15.0,
+//                        ),
+//                      ),
+//                    ),
+//                  ),
+//                ],
+//              ),
+              new Container(
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.only(left: 40.0, right: 40.0, top: 10.0),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                        color: Colors.redAccent,
+                        width: 0.5,
+                        style: BorderStyle.solid),
+                  ),
+                ),
+                padding: const EdgeInsets.only(left: 0.0, right: 10.0),
+                child: new Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    new Expanded(
+                      child: TextField(
+                        textAlign: TextAlign.left,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          // hintText: 'aronhime@jhu.edu',
+                          hintStyle: TextStyle(color: Colors.grey),
                         ),
                       ),
                     ),

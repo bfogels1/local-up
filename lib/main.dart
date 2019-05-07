@@ -10,6 +10,7 @@ void main() {
       '/Login': (context) => LoginPage(),
       '/Signup': (context) => SignupPage(),
       '/GenrePage': (context) => GenrePage(),
+      '/LocationPage': (context) => LocationPage(),
 
       '/AudioPlayer': (context) => AudioApp(),
     },

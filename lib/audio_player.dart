@@ -63,7 +63,6 @@ class AudioApp extends StatefulWidget {
 
 class _AudioAppState extends State<AudioApp> {
 
-
   Duration duration;
   Duration position;
 
@@ -126,7 +125,6 @@ class _AudioAppState extends State<AudioApp> {
   IconData ppIcon = Icons.pause;
 
   Future play() async {
-
     await audioPlayer.play(kUrl);
     setState(() {
       playerState = PlayerState.playing;
@@ -136,7 +134,6 @@ class _AudioAppState extends State<AudioApp> {
   Future nextSong() async {
     //var url = 'http://127.0.0.1:5000/users/next_song';
     print('Url: $kUrl');
-
 
     var url = 'https://local-up-heroku.herokuapp.com/users/next_song';
     var response = await post(
@@ -233,25 +230,61 @@ class _AudioAppState extends State<AudioApp> {
       });
   }
 
+//  _onSelectItem(int index) {
+//    setState(() => _selectedDrawerIndex = index);
+//    Navigator.of(context).pop(); // close the drawer
+//  }
+
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
+
       appBar: AppBar(
-        leading: IconButton(
-          iconSize: 30.0,
-          icon: Icon(Icons.arrow_back_ios)
-        ),
         backgroundColor: Colors.redAccent,
+        // LOGO
         title: Image.asset('assets/images/localup_white_small.png'),
-        actions: <Widget>[
-          IconButton(
-            iconSize: 40.0,
-            color: Colors.black,
-            icon: Icon(Icons.menu),
-          ),
-        ]
+
+        leading: IconButton(
+          icon: Icon(Icons.menu),
+          iconSize: 30.0,
+          // onPressed:() => Navigator.of(context).pop(),
+          // onTap: () {}
+        ),
       ),
+
+        // HAMBURGER MENU
+      drawer: Drawer(
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('Drawer Header'),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+            ),
+            ListTile(
+              title: Text('Edit Genre Preferences'),
+              onTap: () {
+                // Update the state of the app
+                Navigator.of(context).pop();
+                Navigator.pushNamed(context, '/GenrePage');
+              },
+            ),
+            ListTile(
+              title: Text('Edit Location Preferences'),
+              onTap: () {
+                // Update the state of the app
+                Navigator.of(context).pop();
+                Navigator.pushNamed(context, '/LocationPage');
+              },
+            ),
+          ],
+        )
+      ),
+
       body: new Column(
         children: [
           /*** SCROLLABLE LIST ***/

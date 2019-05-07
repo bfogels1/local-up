@@ -134,22 +134,31 @@ class LoginPage extends StatelessWidget {
           fit: BoxFit.cover,
         ),
       ),
+
       child: Scaffold(
         backgroundColor: Colors.transparent,
+
+        // BACK BUTTON
         appBar: AppBar(
-          title: Icon(Icons.menu),
           backgroundColor: Color(0x00000000),
           elevation: 0.0,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            color: Colors.redAccent[200],
+            iconSize: 30.0,
+            onPressed:() => Navigator.pop(context, false),
+          ),
         ),
+
         body: Center(
           child: new Column(
               children: <Widget>[
 
               // LOGO
               Container(
-                padding: EdgeInsets.only(top: 50.0),
+                padding: EdgeInsets.only(top: 40.0),
                 child: Center(
-                    child: Image.asset('assets/images/localup_color.png')
+                  child: Image.asset('assets/images/localup_color.png')
                 ),
               ),
 
@@ -203,7 +212,7 @@ class LoginPage extends StatelessWidget {
               ),
               Divider(
                 color: Colors.white.withOpacity(0.0),
-                height: 24.0,
+                height: 20.0,
               ),
 
               // PASSWORD INPUT
@@ -226,7 +235,8 @@ class LoginPage extends StatelessWidget {
               ),
               new Container(
                 width: MediaQuery.of(context).size.width,
-                margin: const EdgeInsets.only(left: 40.0, right: 40.0, top: 10.0),
+                margin: const EdgeInsets.only(
+                    left: 40.0, right: 40.0, top: 10.0),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   border: Border(
@@ -236,7 +246,7 @@ class LoginPage extends StatelessWidget {
                         style: BorderStyle.solid),
                   ),
                 ),
-                padding: const EdgeInsets.only(left: 0.0, right: 10.0),
+                padding: const EdgeInsets.only(right: 10.0),
                 child: new Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -257,7 +267,7 @@ class LoginPage extends StatelessWidget {
               ),
               Divider(
                 color: Colors.white.withOpacity(0.0),
-                height: 24.0,
+                height: 5.0,
               ),
 
               // FORGOT PASSWORD
@@ -281,14 +291,15 @@ class LoginPage extends StatelessWidget {
                   ),
                 ],
               ),
+
+              // LOG IN BUTTON
               new Container(
                 width: MediaQuery.of(context).size.width,
-                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 10.0),
+                margin: const EdgeInsets.only(
+                    left: 30.0, right: 30.0, top: 20.0),
                 alignment: Alignment.center,
                 child: new Row(
                   children: <Widget>[
-
-                    // LOG IN BUTTON
                     new Expanded(
                       child: new FlatButton(
                         shape: new RoundedRectangleBorder(
@@ -324,10 +335,11 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
 
-              // OR CONNECT WITH GOOGLE OR FACEBOOK
+              // - OR CONNECT WITH -
               new Container(
                 width: MediaQuery.of(context).size.width,
-                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 20.0),
+                margin: const EdgeInsets.only(
+                    left: 30.0, right: 30.0, top: 30.0, bottom: 20.0),
                 alignment: Alignment.center,
                 child: Row(
                   children: <Widget>[
@@ -353,9 +365,11 @@ class LoginPage extends StatelessWidget {
                   ],
                 ),
               ),
+
+              // FACEBOOK OR GOOGLE
               new Container(
                 width: MediaQuery.of(context).size.width,
-                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 10.0),
+                margin: const EdgeInsets.only(left: 30.0, right: 30.0),
                 child: new Row(
                   children: <Widget>[
                     new Expanded(
@@ -469,6 +483,7 @@ class LoginPage extends StatelessWidget {
                   ],
                 ),
               )
+
             ],
           ),
         ),
@@ -494,11 +509,19 @@ class SignupPage extends StatelessWidget {
 
       child: Scaffold(
         backgroundColor: Colors.transparent,
+
+        // BACK BUTTON
         appBar: AppBar(
-          title: Icon(Icons.menu),
           backgroundColor: Color(0x00000000),
           elevation: 0.0,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            color: Colors.redAccent[200],
+            iconSize: 30.0,
+            onPressed:() => Navigator.pop(context, false),
+          ),
         ),
+
         body: Center(
           child: new Column(
             children: <Widget>[
@@ -742,11 +765,37 @@ class SignupPage extends StatelessWidget {
   }
 }
 
-class LocationPage extends StatelessWidget {
+class LocationPage extends StatefulWidget {
+  const LocationPage({ Key key }) : super(key: key);
+
+  @override
+  _LocationPageState createState() => _LocationPageState();
+}
+
+class _LocationPageState extends State<LocationPage> {
+
+  // Define the focus node. To manage the lifecycle, create the FocusNode in
+  // the initState method, and clean it up in the dispose method
+//  FocusNode myFocusNode;
+//  @override
+//  void initState() {
+//    super.initState();
+//    myFocusNode = FocusNode();
+//  }
+//  @override
+//  void dispose() {
+//    // Clean up the focus node when the Form is disposed
+//    myFocusNode.dispose();
+//    super.dispose();
+//  }
+
   @override
   Widget build(BuildContext context) {
     return new Container(
-      height: MediaQuery.of(context).size.height,
+      height: MediaQuery
+          .of(context)
+          .size
+          .height,
       decoration: BoxDecoration(
         color: Colors.white,
         image: DecorationImage(
@@ -759,27 +808,32 @@ class LocationPage extends StatelessWidget {
 
       child: Scaffold(
         backgroundColor: Colors.transparent,
+
+        // BACK BUTTON
         appBar: AppBar(
-          title: Icon(Icons.menu),
           backgroundColor: Color(0x00000000),
           elevation: 0.0,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            color: Colors.redAccent[200],
+            iconSize: 30.0,
+            onPressed:() => Navigator.pop(context, false),
+          ),
         ),
+
         body: Center(
           child: new Column(
             children: <Widget>[
-              // TODO figure out what I'm doing
-//              new TextField(
-//                onChanged: ,
-//                decoration: ,
-//                controller: myController,
-//              ),
-              // Background
+
+              // LOGO
               new Container(
                 padding: EdgeInsets.only(top: 20.0),
                 child: Center(
                     child: Image.asset('assets/images/localup_color.png')
                 ),
               ),
+
+              // LOCATION PREFERENCES
               new Row(
                 children: <Widget>[
                   Expanded(
@@ -792,13 +846,31 @@ class LocationPage extends StatelessWidget {
                         fontSize: 25.0,
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
 
+              // DESCRIPTION
+//              new Row(
+//                children: <Widget>[
+//                  Expanded(
+//                    child: Text(
+//                      "Musicians performing near you in the upcoming weeks",
+//                      textAlign: TextAlign.center,
+//                      style: TextStyle(
+//                        // fontWeight: FontWeight.bold,
+//                        color: Colors.redAccent,
+//                        fontSize: 15.0,
+//                      ),
+//                    ),
+//                  ),
+//                ],
+//              ),
+
               new Container(
                 width: MediaQuery.of(context).size.width,
-                margin: const EdgeInsets.only(left: 40.0, right: 40.0, top: 10.0),
+                margin: const EdgeInsets.only(
+                    left: 40.0, right: 40.0, top: 20.0),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   border: Border(
@@ -815,22 +887,46 @@ class LocationPage extends StatelessWidget {
                   children: <Widget>[
                     new Expanded(
                       child: TextField(
-                        textAlign: TextAlign.left,
+
+                        textAlign: TextAlign.center,
+                        cursorColor: Colors.redAccent,
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          // hintText: 'aronhime@jhu.edu',
-                          hintStyle: TextStyle(color: Colors.grey),
                         ),
+                        // selectionEnabled: true,
+                        // autocorrect: true,
+                        // autofocus: true,
                       ),
                     ),
                   ],
                 ),
               ),
 
+              // USE CURRENT LOCATION
+              new Row(
+                children: <Widget>[
+                  Expanded(
+                    child: new FlatButton(
+                      child: new Text(
+                        "Use my current location",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 15.0,
+                        ),
+                      ),
+                      onPressed: () => {},
+                    ),
+                  ),
+                ],
+              ),
+
               // CONTINUE
               new Container(
                 width: MediaQuery.of(context).size.width,
-                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 50.0),
+                margin: const EdgeInsets.only(
+                    left: 30.0, right: 30.0, top: 230.0),
                 alignment: Alignment.center,
                 child: new Row(
                   children: <Widget>[
@@ -845,7 +941,7 @@ class LocationPage extends StatelessWidget {
                         },
                         child: new Container(
                           padding: const EdgeInsets.symmetric(
-                            vertical: 20.0,
+                            vertical: 15.0,
                             horizontal: 20.0,
                           ),
                           child: new Row(
@@ -853,7 +949,7 @@ class LocationPage extends StatelessWidget {
                             children: <Widget>[
                               new Expanded(
                                 child: Text(
-                                  "Continue",
+                                  "CONTINUE",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       color: Colors.white,
@@ -870,24 +966,20 @@ class LocationPage extends StatelessWidget {
               ),
 
             ],
-          ),
-        ),
+          )
+        )
       ),
     );
+
   }
 }
 
 class GenrePage extends StatefulWidget {
   const GenrePage({ Key key }) : super(key: key);
-//  const GenrePage({
-//    Key key,
-//    this.color: const Color(0xFFFFE306)
-//    this.child,
-//  }) : super(key: key);
-//
 
   @override
   _GenrePageState createState() => _GenrePageState();
+
 }
 class _GenrePageState extends State<GenrePage> {
 
@@ -917,23 +1009,22 @@ class _GenrePageState extends State<GenrePage> {
 
       child: Scaffold(
         backgroundColor: Colors.transparent,
+
+        // BACK BUTTON
         appBar: AppBar(
-          title: Icon(Icons.menu),
           backgroundColor: Color(0x00000000),
           elevation: 0.0,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            color: Colors.redAccent[200],
+            iconSize: 30.0,
+            onPressed:() => Navigator.pop(context, false),
+          ),
         ),
 
         body: SingleChildScrollView(
           child: new Column(
             children: <Widget>[
-
-//              // LOGO
-//              Container(
-//                //padding: EdgeInsets.only(top: 5.0),
-//                child: Center(
-//                    child: Image.asset('assets/images/localup_color.png')
-//                ),
-//              ),
 
               // MUSICAL PREFERENCES
               new Row(
@@ -1547,7 +1638,8 @@ class _GenrePageState extends State<GenrePage> {
               // CONTINUE
               new Container(
                 width: MediaQuery.of(context).size.width,
-                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 50.0),
+                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:
+                20.0),
                 alignment: Alignment.center,
                 child: new Row(
                   children: <Widget>[

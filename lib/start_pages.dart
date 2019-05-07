@@ -800,6 +800,7 @@ class _GenrePageState extends State<GenrePage> {
 //                ),
 //              ),
 
+              // MUSICAL PREFERENCES
               new Row(
                 children: <Widget>[
                   Expanded(
@@ -867,7 +868,6 @@ class _GenrePageState extends State<GenrePage> {
                   ),
                 ],
               ),
-
               new Container(
                 width: MediaQuery.of(context).size.width,
                 margin: const EdgeInsets.only(
@@ -896,13 +896,46 @@ class _GenrePageState extends State<GenrePage> {
                 children: <Widget>[
                   new Expanded(
                     child: new Padding(
-                      padding: const EdgeInsets.only(left: 40.0),
+                      padding: const EdgeInsets.only(top: 10.0),
                       child: new Text(
                         "RAP",
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.redAccent,
                           fontSize: 20.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              new Row(
+                children: <Widget>[
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(left: 20.0),
+                      child: new Text(
+                        "Hate it",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          //fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 15.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(right: 20.0),
+                      child: new Text(
+                        "Love it",
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                          //fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 15.0,
                         ),
                       ),
                     ),
@@ -937,9 +970,10 @@ class _GenrePageState extends State<GenrePage> {
                 children: <Widget>[
                   new Expanded(
                     child: new Padding(
-                      padding: const EdgeInsets.only(left: 40.0),
+                      padding: const EdgeInsets.only(top: 10.0),
                       child: new Text(
                         "R&B",
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.redAccent,
@@ -950,10 +984,42 @@ class _GenrePageState extends State<GenrePage> {
                   ),
                 ],
               ),
+              new Row(
+                children: <Widget>[
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(left: 20.0),
+                      child: new Text(
+                        "Hate it",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          //fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 15.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(right: 20.0),
+                      child: new Text(
+                        "Love it",
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                          //fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 15.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               new Container(
                 width: MediaQuery.of(context).size.width,
-                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:
-                10.0, bottom: 10.0),
+                margin: const EdgeInsets.only(
+                    left: 30.0, right: 30.0),
                 alignment: Alignment.center,
                 child: new Row(
                   children: <Widget>[
@@ -978,9 +1044,10 @@ class _GenrePageState extends State<GenrePage> {
                 children: <Widget>[
                   new Expanded(
                     child: new Padding(
-                      padding: const EdgeInsets.only(left: 40.0),
+                      padding: const EdgeInsets.only(top: 10.0),
                       child: new Text(
                         "Rock",
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.redAccent,
@@ -991,10 +1058,42 @@ class _GenrePageState extends State<GenrePage> {
                   ),
                 ],
               ),
+              new Row(
+                children: <Widget>[
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(left: 20.0),
+                      child: new Text(
+                        "Hate it",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          //fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 15.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(right: 20.0),
+                      child: new Text(
+                        "Love it",
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                          //fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 15.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               new Container(
                 width: MediaQuery.of(context).size.width,
-                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:
-                10.0, bottom: 10.0),
+                margin: const EdgeInsets.only(
+                    left: 30.0, right: 30.0),
                 alignment: Alignment.center,
                 child: new Row(
                   children: <Widget>[
@@ -1019,13 +1118,46 @@ class _GenrePageState extends State<GenrePage> {
                 children: <Widget>[
                   new Expanded(
                     child: new Padding(
-                      padding: const EdgeInsets.only(left: 40.0),
+                      padding: const EdgeInsets.only(top: 10.0),
                       child: new Text(
                         "Classical",
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.redAccent,
                           fontSize: 20.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              new Row(
+                children: <Widget>[
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(left: 20.0),
+                      child: new Text(
+                        "Hate it",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          //fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 15.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(right: 20.0),
+                      child: new Text(
+                        "Love it",
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                          //fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 15.0,
                         ),
                       ),
                     ),
@@ -1060,9 +1192,10 @@ class _GenrePageState extends State<GenrePage> {
                 children: <Widget>[
                   new Expanded(
                     child: new Padding(
-                      padding: const EdgeInsets.only(left: 40.0),
+                      padding: const EdgeInsets.only(top: 10.0),
                       child: new Text(
                         "EDM",
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.redAccent,
@@ -1073,10 +1206,42 @@ class _GenrePageState extends State<GenrePage> {
                   ),
                 ],
               ),
+              new Row(
+                children: <Widget>[
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(left: 20.0),
+                      child: new Text(
+                        "Hate it",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          //fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 15.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(right: 20.0),
+                      child: new Text(
+                        "Love it",
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                          //fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 15.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               new Container(
                 width: MediaQuery.of(context).size.width,
-                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:
-                10.0, bottom: 10.0),
+                margin: const EdgeInsets.only(
+                    left: 30.0, right: 30.0),
                 alignment: Alignment.center,
                 child: new Row(
                   children: <Widget>[
@@ -1101,9 +1266,10 @@ class _GenrePageState extends State<GenrePage> {
                 children: <Widget>[
                   new Expanded(
                     child: new Padding(
-                      padding: const EdgeInsets.only(left: 40.0),
+                      padding: const EdgeInsets.only(top: 10.0),
                       child: new Text(
                         "Hip Hop",
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.redAccent,
@@ -1114,10 +1280,42 @@ class _GenrePageState extends State<GenrePage> {
                   ),
                 ],
               ),
+              new Row(
+                children: <Widget>[
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(left: 20.0),
+                      child: new Text(
+                        "Hate it",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          //fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 15.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(right: 20.0),
+                      child: new Text(
+                        "Love it",
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                          //fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 15.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               new Container(
                 width: MediaQuery.of(context).size.width,
-                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:
-                10.0, bottom: 10.0),
+                margin: const EdgeInsets.only(
+                    left: 30.0, right: 30.0),
                 alignment: Alignment.center,
                 child: new Row(
                   children: <Widget>[
@@ -1142,9 +1340,10 @@ class _GenrePageState extends State<GenrePage> {
                 children: <Widget>[
                   new Expanded(
                     child: new Padding(
-                      padding: const EdgeInsets.only(left: 40.0),
+                      padding: const EdgeInsets.only(top: 10.0),
                       child: new Text(
                         "Alternative/Indie",
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.redAccent,
@@ -1155,10 +1354,42 @@ class _GenrePageState extends State<GenrePage> {
                   ),
                 ],
               ),
+              new Row(
+                children: <Widget>[
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(left: 20.0),
+                      child: new Text(
+                        "Hate it",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          //fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 15.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                  new Expanded(
+                    child: new Padding(
+                      padding: const EdgeInsets.only(right: 20.0),
+                      child: new Text(
+                        "Love it",
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                          //fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                          fontSize: 15.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               new Container(
                 width: MediaQuery.of(context).size.width,
-                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top:
-                10.0, bottom: 10.0),
+                margin: const EdgeInsets.only(
+                    left: 30.0, right: 30.0),
                 alignment: Alignment.center,
                 child: new Row(
                   children: <Widget>[

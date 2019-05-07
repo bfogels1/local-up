@@ -248,13 +248,14 @@ class _AudioAppState extends State<AudioApp> {
         leading: IconButton(
           icon: Icon(Icons.menu),
           iconSize: 30.0,
+          onPressed: () {},
           // onPressed:() => Navigator.of(context).pop(),
           // onTap: () {}
         ),
       ),
 
         // HAMBURGER MENU
-      drawer: Drawer(
+      drawer: new Drawer(
         child: ListView(
           // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,
